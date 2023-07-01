@@ -1,14 +1,17 @@
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.window.CanvasBasedWindow
 import kotlinx.browser.document
-import react.create
-import react.dom.client.createRoot
+import kotlinx.dom.appendText
+import org.jetbrains.skiko.wasm.onWasmReady
 
+
+@OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    val container = document.createElement("div")
-    document.body?.appendChild(container)
-
-    val welcome = Welcome.create {
-        name = "Kotlin/JS"
+    onWasmReady {
+        CanvasBasedWindow("CV") {
+            MainView()
+        }
+        document.body?.appendText("Hello")
     }
-    createRoot(container).render(welcome)
 }
 

@@ -12,8 +12,10 @@ import kotlinx.html.*
 fun HTML.index() {
     head {
         title("Hello from Ktor!")
+        script { src = "/static/skiko.js" }
     }
     body {
+        canvas { id = "ComposeTarget" }
         div {
             +"Hello from Ktor"
         }
