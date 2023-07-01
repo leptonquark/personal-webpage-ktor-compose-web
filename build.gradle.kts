@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
@@ -21,6 +23,7 @@ kotlin {
         withJava()
     }
     js {
+        moduleName = "justinsaler"
         binaries.executable()
         browser {
             commonWebpackConfig {
@@ -30,10 +33,32 @@ kotlin {
             }
         }
     }
+    wasm {
+        moduleName = "justinsaler"
+        browser {
+            commonWebpackConfig {
+                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).copy(
+                    static = (devServer?.static ?: mutableListOf()).apply {
+                        add(project.rootDir.path)
+                    },
+                )
+            }
+        }
+        binaries.executable()
+    }
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                api(compose.runtime)
+                api(compose.ui)
+                api(compose.foundation)
+                api(compose.material)
+                api(compose.material3)
+            }
+        }
         val jvmMain by getting {
             dependencies {
+                api(compose.runtime)
                 implementation("io.ktor:ktor-server-netty:2.0.2")
                 implementation("io.ktor:ktor-server-html-builder-jvm:2.0.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
@@ -42,9 +67,23 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 api(compose.runtime)
+                api(compose.ui)
+                api(compose.foundation)
+                api(compose.material)
+                api(compose.material3)
+
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
+            }
+        }
+        val wasmMain by getting {
+            dependencies {
+                api(compose.runtime)
+                api(compose.ui)
+                api(compose.foundation)
+                api(compose.material)
+                api(compose.material3)
             }
         }
 
@@ -76,4 +115,13 @@ tasks.named<Copy>("jvmProcessResources") {
 tasks.named<JavaExec>("run") {
     dependsOn(tasks.named<Jar>("jvmJar"))
     classpath(tasks.named<Jar>("jvmJar"))
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        val kotlinVersion = project.property("kotlin.version") as String
+        if (requested.module.name.startsWith("kotlin-stdlib")) {
+            useVersion(kotlinVersion)
+        }
+    }
 }
