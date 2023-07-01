@@ -42,6 +42,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 api(compose.runtime)
+                api(compose.ui)
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
@@ -76,4 +77,13 @@ tasks.named<Copy>("jvmProcessResources") {
 tasks.named<JavaExec>("run") {
     dependsOn(tasks.named<Jar>("jvmJar"))
     classpath(tasks.named<Jar>("jvmJar"))
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        val kotlinVersion = project.property("kotlin.version") as String
+        if (requested.module.name.startsWith("kotlin-stdlib")) {
+            useVersion(kotlinVersion)
+        }
+    }
 }
