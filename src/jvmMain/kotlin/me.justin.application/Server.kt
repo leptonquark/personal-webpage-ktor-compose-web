@@ -17,9 +17,6 @@ fun HTML.index() {
     body {
         canvas { id = "ComposeTarget" }
         div {
-            +"Hello from Ktor"
-        }
-        div {
             id = "root"
         }
         script(src = "/static/CV.js") {}
