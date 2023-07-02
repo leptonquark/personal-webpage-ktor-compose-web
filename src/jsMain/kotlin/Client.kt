@@ -1,7 +1,5 @@
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
-import kotlinx.browser.document
-import kotlinx.dom.appendText
 import org.jetbrains.skiko.wasm.onWasmReady
 
 
@@ -11,7 +9,6 @@ fun main() {
         CanvasBasedWindow("CV") {
             MainView()
         }
-        document.body?.appendText("Hello")
     }
 }
 

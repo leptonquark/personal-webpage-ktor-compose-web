@@ -1,7 +1,11 @@
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
 fun MainView() {
-    Text(text = "Test")
+    Column {
+        Text(text = "Testing Compose")
+        Text(text = "Testing Compose")
+    }
 }
