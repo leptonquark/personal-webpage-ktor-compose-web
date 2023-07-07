@@ -3,9 +3,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun MainView() {
+fun MainView(about: String) {
     Column {
-        Text(text = "Testing Compose")
-        Text(text = "Testing Compose")
+        Text(text = about)
     }
 }

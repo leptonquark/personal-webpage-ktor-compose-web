@@ -48,6 +48,8 @@ kotlin {
         binaries.executable()
     }
     sourceSets {
+        val ktorVersion = project.property("ktor.version") as String
+
         val commonMain by getting {
             dependencies {
                 implementation(compose.runtime)
@@ -59,13 +61,15 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty:2.0.2")
-                implementation("io.ktor:ktor-server-html-builder-jvm:2.0.2")
+                implementation("io.ktor:ktor-server-netty:$ktorVersion")
+                implementation("io.ktor:ktor-server-html-builder-jvm:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
             }
         }
         val jsMain by getting {
             dependencies {
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-js:$ktorVersion")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
