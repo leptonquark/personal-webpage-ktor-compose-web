@@ -72,7 +72,6 @@ kotlin {
             }
         }
         val wasmMain by getting
-
     }
 }
 
@@ -108,6 +107,18 @@ configurations.all {
         val kotlinVersion = project.property("kotlin.version") as String
         if (requested.module.name.startsWith("kotlin-stdlib")) {
             useVersion(kotlinVersion)
+        }
+    }
+}
+
+distributions {
+    main {
+        contents {
+            from("$buildDir/libs") {
+                exclude(project.name)
+                rename("${project.name}-jvm", project.name)
+                into("lib")
+            }
         }
     }
 }
