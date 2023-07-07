@@ -110,15 +110,3 @@ configurations.all {
         }
     }
 }
-
-distributions {
-    main {
-        contents {
-            from("$buildDir/libs") {
-                exclude(project.name)
-                rename("${project.name}-jvm", project.name)
-                into("lib")
-            }
-        }
-    }
-}

@@ -5,6 +5,7 @@ import io.ktor.server.application.*
 import io.ktor.server.html.*
 import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.html.*
 
@@ -27,11 +28,15 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 @Suppress("Unused")
 fun Application.module() {
     val title =  environment.config.property("me.title").getString()
+    val about = environment.config.property("me.about").getString()
     routing {
         get("/") {
             call.respondHtml(HttpStatusCode.OK) {
                 index(title = title)
             }
+        }
+        get("/api/about"){
+            call.respondText(about, ContentType.Text.Plain)
         }
         static("/static") {
             resources()
