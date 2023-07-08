@@ -1,17 +1,17 @@
 package me.justin.application
 
-import io.ktor.http.HttpStatusCode
+import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.engine.embeddedServer
 import io.ktor.server.html.*
 import io.ktor.server.http.content.*
-import io.ktor.server.netty.Netty
+import io.ktor.server.netty.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.html.*
 
-fun HTML.index() {
+fun HTML.index(title: String) {
     head {
-        title("Hello from Ktor!")
+        title(title)
         script { src = "/static/skiko.js" }
     }
     body {
@@ -23,15 +23,23 @@ fun HTML.index() {
     }
 }
 
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "127.0.0.1") {
-        routing {
-            get("/") {
-                call.respondHtml(HttpStatusCode.OK, HTML::index)
-            }
-            static("/static") {
-                resources()
+fun main(args: Array<String>): Unit = EngineMain.main(args)
+
+@Suppress("Unused")
+fun Application.module() {
+    val title =  environment.config.property("me.title").getString()
+    val about = environment.config.property("me.about").getString()
+    routing {
+        get("/") {
+            call.respondHtml(HttpStatusCode.OK) {
+                index(title = title)
             }
         }
-    }.start(wait = true)
+        get("/api/about"){
+            call.respondText(about, ContentType.Text.Plain)
+        }
+        static("/static") {
+            resources()
+        }
+    }
 }

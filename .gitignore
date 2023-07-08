@@ -83,3 +83,4 @@ gradlew/
 gradle/
 kotlin-js-store/
 .idea/
+/application.conf
