@@ -50,6 +50,7 @@ kotlin {
     }
     sourceSets {
         val ktorVersion : String by project
+        val kotlinInjectVersion : String by project
 
         val commonMain by getting {
             dependencies {
@@ -57,6 +58,7 @@ kotlin {
                 implementation(compose.ui)
                 implementation(compose.foundation)
                 implementation(compose.material3)
+
             }
         }
         val jvmMain by getting {
@@ -70,13 +72,17 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-js:$ktorVersion")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-pre.346")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-pre.346")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.9.3-pre.346")
+                implementation("me.tatarka.inject:kotlin-inject-runtime:$kotlinInjectVersion")
+                kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
             }
         }
         val wasmMain by getting
     }
+}
+
+dependencies{
+    val kotlinInjectVersion : String by project
+    add("kspJs", "me.tatarka.inject:kotlin-inject-compiler-ksp:$kotlinInjectVersion")
 }
 
 application {
