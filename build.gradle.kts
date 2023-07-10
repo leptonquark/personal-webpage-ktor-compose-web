@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
+    id("com.google.devtools.ksp")
     application
 }
 
@@ -48,7 +49,7 @@ kotlin {
         binaries.executable()
     }
     sourceSets {
-        val ktorVersion = project.property("ktor.version") as String
+        val ktorVersion : String by project
 
         val commonMain by getting {
             dependencies {
@@ -87,8 +88,8 @@ compose.experimental {
 }
 
 compose {
-    val composeVersion = project.property("compose.version") as String
-    val kotlinVersion = project.property("kotlin.version") as String
+    val composeVersion: String by project
+    val kotlinVersion: String by project
 
     kotlinCompilerPlugin.set(composeVersion)
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
@@ -107,7 +108,7 @@ tasks.named<JavaExec>("run") {
 
 configurations.all {
     resolutionStrategy.eachDependency {
-        val kotlinVersion = project.property("kotlin.version") as String
+        val kotlinVersion: String by project
         if (requested.module.name.startsWith("kotlin-stdlib")) {
             useVersion(kotlinVersion)
         }
