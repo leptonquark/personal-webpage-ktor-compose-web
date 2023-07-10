@@ -1,12 +1,10 @@
 package viewmodel
 
-import io.ktor.client.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
+import data.AboutRepository
 
-class MainViewModel(private val client: HttpClient) {
+class MainViewModel(private val aboutRepository: AboutRepository) {
 
-    suspend fun getAbout() = client.get("/api/about").bodyAsText()
+    suspend fun getAbout() = aboutRepository.getAbout()
 
 
 }
