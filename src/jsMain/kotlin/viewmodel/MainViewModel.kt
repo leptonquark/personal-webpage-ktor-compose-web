@@ -1,8 +1,9 @@
 package viewmodel
 
 import data.AboutRepository
+import me.tatarka.inject.annotations.Inject
 
-class MainViewModel(private val aboutRepository: AboutRepository) {
+class MainViewModel @Inject constructor(private val aboutRepository: AboutRepository) {
 
     suspend fun getAbout() = aboutRepository.getAbout()
 

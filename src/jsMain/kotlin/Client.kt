@@ -1,12 +1,9 @@
-import data.AboutRepository
-import io.ktor.client.*
-import ui.MainScreen
-import viewmodel.MainViewModel
+import di.ClientComponent
+import di.create
 
 
 suspend fun main() {
-    val repository = AboutRepository(HttpClient())
-    val viewModel = MainViewModel(repository)
-    val mainScreen = MainScreen(viewModel)
+    val clientComponent = ClientComponent::class.create()
+    val mainScreen = clientComponent.mainScreen
     mainScreen.render()
 }
