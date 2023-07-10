@@ -14,8 +14,9 @@ pluginManagement {
 
         kotlin("multiplatform") version kotlinVersion
         kotlin("jvm") version kotlinVersion
+        kotlin("plugin.serialization") version kotlinVersion
         id("org.jetbrains.compose") version composeVersion
-        id("com.google.devtools.ksp") version kspVersion apply false
+        id("com.google.devtools.ksp") version kspVersion
 
     }
 }

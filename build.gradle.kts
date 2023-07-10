@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("org.jetbrains.compose")
     id("com.google.devtools.ksp")
     application
@@ -48,8 +49,15 @@ kotlin {
         }
         binaries.executable()
     }
+    sourceSets.forEach {
+        it.dependencies {
+            val ktorVersion : String by project
+            implementation(project.dependencies.enforcedPlatform("io.ktor:ktor-bom:$ktorVersion"))
+
+        }
+    }
+
     sourceSets {
-        val ktorVersion : String by project
         val kotlinInjectVersion : String by project
 
         val commonMain by getting {
@@ -58,24 +66,34 @@ kotlin {
                 implementation(compose.ui)
                 implementation(compose.foundation)
                 implementation(compose.material3)
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1-wasm0")
+
             }
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty:$ktorVersion")
-                implementation("io.ktor:ktor-server-html-builder-jvm:$ktorVersion")
+                implementation("io.ktor:ktor-server-netty")
+                implementation("io.ktor:ktor-server-html-builder-jvm")
+                implementation("io.ktor:ktor-server-content-negotiation")
+                implementation("io.ktor:ktor-serialization-kotlinx-json")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
             }
         }
         val jsMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-js:$ktorVersion")
+                implementation("io.ktor:ktor-client-core")
+                implementation("io.ktor:ktor-client-js")
                 implementation("me.tatarka.inject:kotlin-inject-runtime:$kotlinInjectVersion")
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
             }
         }
-        val wasmMain by getting
+        val wasmMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core-wasm:1.5.1-wasm0")
+
+            }
+        }
     }
 }
 

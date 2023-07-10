@@ -1,11 +1,14 @@
 package me.justin.application
 
+import data.AboutMessage
 import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.config.*
 import io.ktor.server.html.*
 import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
+import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.html.*
@@ -40,11 +43,14 @@ fun Application.module() {
             }
         }
         get(ApiRoute.ABOUT){
-            call.respondText(about, ContentType.Text.Plain)
+            call.respond(AboutMessage(about))
         }
         static("/static") {
             resources()
         }
+    }
+    install(ContentNegotiation) {
+        json()
     }
 }
 
