@@ -35,7 +35,7 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 @Suppress("Unused")
 fun Application.module() {
     val title =  environment.config.getPropertyOrNull("me.title") ?: DEFAULT_TITLE
-    val about = environment.config.getPropertyOrNull("me.about") ?: "About not found"
+    val about = environment.config.getPropertyOrNull("me.about")
     routing {
         get("/") {
             call.respondHtml(HttpStatusCode.OK) {
