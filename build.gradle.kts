@@ -83,9 +83,11 @@ kotlin {
             dependencies {
                 implementation("io.ktor:ktor-client-core")
                 implementation("io.ktor:ktor-client-js")
+                implementation("io.ktor:ktor-client-content-negotiation")
+                implementation("io.ktor:ktor-serialization-kotlinx-json")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
                 implementation("me.tatarka.inject:kotlin-inject-runtime:$kotlinInjectVersion")
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
             }
         }
         val wasmMain by getting {

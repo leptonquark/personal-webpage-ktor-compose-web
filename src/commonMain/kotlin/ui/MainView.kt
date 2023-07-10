@@ -13,14 +13,14 @@ import androidx.compose.ui.unit.dp
 private const val ABOUT_ME_MAX_WIDTH = 600
 
 @Composable
-fun MainView(about: String) {
+fun MainView(about: String?) {
     MaterialTheme {
         Column(
             modifier = Modifier.fillMaxSize().padding(horizontal = 32.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            AboutMe(about)
+            about?.let { AboutMe(it) }
         }
     }
 }
