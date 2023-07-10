@@ -2,6 +2,7 @@ package me.justin.application
 
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.config.*
 import io.ktor.server.html.*
 import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
@@ -9,6 +10,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.html.*
 import route.ApiRoute
+
+private const val DEFAULT_TITLE = "CV"
 
 fun HTML.index(title: String) {
     head {
@@ -28,8 +31,8 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 @Suppress("Unused")
 fun Application.module() {
-    val title =  environment.config.property("me.title").getString()
-    val about = environment.config.property("me.about").getString()
+    val title =  environment.config.getPropertyOrNull("me.title") ?: DEFAULT_TITLE
+    val about = environment.config.getPropertyOrNull("me.about") ?: "About not found"
     routing {
         get("/") {
             call.respondHtml(HttpStatusCode.OK) {
@@ -43,4 +46,10 @@ fun Application.module() {
             resources()
         }
     }
+}
+
+private fun ApplicationConfig.getPropertyOrNull(path: String) = try {
+    property(path).getString()
+} catch (_: ApplicationConfigurationException) {
+    null
 }
