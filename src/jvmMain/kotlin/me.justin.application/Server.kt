@@ -8,6 +8,7 @@ import io.ktor.server.netty.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.html.*
+import route.ApiRoute
 
 fun HTML.index(title: String) {
     head {
@@ -35,7 +36,7 @@ fun Application.module() {
                 index(title = title)
             }
         }
-        get("/api/about"){
+        get(ApiRoute.ABOUT){
             call.respondText(about, ContentType.Text.Plain)
         }
         static("/static") {
