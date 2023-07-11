@@ -36,21 +36,21 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 fun Application.module() {
     val title =  environment.config.getPropertyOrNull("me.title") ?: DEFAULT_TITLE
     val about = environment.config.getPropertyOrNull("me.about")
-    routing {
-        get("/") {
-            call.respondHtml(HttpStatusCode.OK) {
-                index(title = title)
-            }
-        }
-        get(ApiRoute.ABOUT){
-            call.respond(AboutMessage(about))
-        }
-        static("/static") {
-            resources()
+    routing { router(title, about) }
+    install(ContentNegotiation) { json() }
+}
+
+private fun Routing.router(title: String, about: String?) {
+    get("/") {
+        call.respondHtml(HttpStatusCode.OK) {
+            index(title = title)
         }
     }
-    install(ContentNegotiation) {
-        json()
+    get(ApiRoute.ABOUT) {
+        call.respond(AboutMessage(about))
+    }
+    static("/static") {
+        resources()
     }
 }
 
