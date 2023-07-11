@@ -20,7 +20,7 @@ class MainViewModel @Inject constructor(private val aboutRepository: AboutReposi
             emit(MainState(about))
         }.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(),
+            started = SharingStarted.Eagerly,
             initialValue = MainState()
         )
 

@@ -3,5 +3,7 @@ import di.create
 
 
 fun main() {
-    ClientComponent::class.create()
+    val component = ClientComponent::class.create()
+    val mainScreen = component.mainScreen
+    mainScreen.render()
 }

@@ -34,7 +34,7 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 @Suppress("Unused")
 fun Application.module() {
-    val title =  environment.config.getPropertyOrNull("me.title") ?: DEFAULT_TITLE
+    val title = environment.config.getPropertyOrNull("me.title") ?: DEFAULT_TITLE
     val about = environment.config.getPropertyOrNull("me.about")
     routing { router(title, about) }
     install(ContentNegotiation) { json() }
@@ -49,7 +49,9 @@ private fun Routing.router(title: String, about: String?) {
     get(ApiRoute.ABOUT) {
         call.respond(AboutMessage(about))
     }
-    staticResources("/static","resources")
+    static("/static") {
+        resources()
+    }
 }
 
 private fun ApplicationConfig.getPropertyOrNull(path: String) = try {
