@@ -12,16 +12,15 @@ import org.jetbrains.skiko.wasm.onWasmReady
 import viewmodel.MainState
 import viewmodel.MainViewModel
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Singleton
 class MainScreen @Inject constructor(private val viewModel: MainViewModel) {
 
     private val screenScope = CoroutineScope(Dispatchers.Main)
-
-    init {
+    fun render(){
         screenScope.launch { viewModel.state.collectLatest { state -> onState(state) } }
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
     private fun onState(state: MainState) {
         onWasmReady {
             CanvasBasedWindow("CV") {
