@@ -4,7 +4,9 @@ import data.AboutRepository
 import di.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.SharingStarted
 import me.tatarka.inject.annotations.Inject
 
 data class MainState(val about: String? = null)
@@ -16,13 +18,11 @@ class MainViewModel @Inject constructor(private val aboutRepository: AboutReposi
 
 
     val state = flow {
-            val about = aboutRepository.getAbout()
-            emit(MainState(about))
-        }.stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.Eagerly,
-            initialValue = MainState()
-        )
-
-
+        val about = aboutRepository.getAbout()
+        emit(MainState(about))
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = MainState()
+    )
 }
