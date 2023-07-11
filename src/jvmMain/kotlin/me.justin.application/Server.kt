@@ -49,9 +49,7 @@ private fun Routing.router(title: String, about: String?) {
     get(ApiRoute.ABOUT) {
         call.respond(AboutMessage(about))
     }
-    static("/static") {
-        resources()
-    }
+    staticResources("/static","resources")
 }
 
 private fun ApplicationConfig.getPropertyOrNull(path: String) = try {
