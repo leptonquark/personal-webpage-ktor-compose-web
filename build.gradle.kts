@@ -140,3 +140,8 @@ configurations.all {
         }
     }
 }
+
+detekt {
+    config.setFrom("detekt-config.yml")
+    source.setFrom("src/commonMain/kotlin", "src/jsMain/kotlin", "src/jvmMain/kotlin", "src/wasmMain/kotlin")
+}
