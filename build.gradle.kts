@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
     id("com.google.devtools.ksp")
+    id("io.gitlab.arturbosch.detekt")
     application
 }
 

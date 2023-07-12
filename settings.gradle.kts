@@ -11,12 +11,14 @@ pluginManagement {
         val kotlinVersion : String by settings
         val composeVersion : String by settings
         val kspVersion : String by settings
+        val detektVersion : String by settings
 
         kotlin("multiplatform") version kotlinVersion
         kotlin("jvm") version kotlinVersion
         kotlin("plugin.serialization") version kotlinVersion
         id("org.jetbrains.compose") version composeVersion
         id("com.google.devtools.ksp") version kspVersion
+        id("io.gitlab.arturbosch.detekt") version detektVersion
 
     }
 }

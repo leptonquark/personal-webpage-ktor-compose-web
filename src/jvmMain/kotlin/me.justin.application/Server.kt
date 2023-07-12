@@ -1,17 +1,30 @@
 package me.justin.application
 
 import data.AboutMessage
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.application.*
-import io.ktor.server.config.*
-import io.ktor.server.html.*
-import io.ktor.server.http.content.*
-import io.ktor.server.netty.*
-import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import kotlinx.html.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.serialization.kotlinx.json.json
+import io.ktor.server.application.Application
+import io.ktor.server.application.call
+import io.ktor.server.application.install
+import io.ktor.server.config.ApplicationConfig
+import io.ktor.server.config.ApplicationConfigurationException
+import io.ktor.server.html.respondHtml
+import io.ktor.server.http.content.resources
+import io.ktor.server.http.content.static
+import io.ktor.server.netty.EngineMain
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.response.respond
+import io.ktor.server.routing.Routing
+import io.ktor.server.routing.get
+import io.ktor.server.routing.routing
+import kotlinx.html.HTML
+import kotlinx.html.body
+import kotlinx.html.canvas
+import kotlinx.html.div
+import kotlinx.html.head
+import kotlinx.html.id
+import kotlinx.html.script
+import kotlinx.html.title
 import route.ApiRoute
 
 private const val DEFAULT_TITLE = "CV"
