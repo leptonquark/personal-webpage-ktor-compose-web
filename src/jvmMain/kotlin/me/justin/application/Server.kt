@@ -43,7 +43,7 @@ fun HTML.index(title: String) {
     }
 }
 
-fun main(args: Array<String>): Unit = EngineMain.main(args)
+fun main(args: Array<String>) = EngineMain.main(args)
 
 @Suppress("Unused")
 fun Application.module() {
