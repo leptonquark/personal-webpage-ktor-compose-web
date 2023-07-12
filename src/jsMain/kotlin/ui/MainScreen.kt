@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 import org.jetbrains.skiko.wasm.onWasmReady
+import ui.component.MainView
 import viewmodel.MainState
 import viewmodel.MainViewModel
 

@@ -1,4 +1,4 @@
-package ui
+package ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,13 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import ui.unit.Spacing
 
 @Composable
 fun MainView(about: String?) {
     MaterialTheme {
         Column(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 32.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+            modifier = Modifier.fillMaxSize().padding(horizontal = Spacing.M),
+            verticalArrangement = Arrangement.spacedBy(Spacing.S, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             about?.let { AboutMe(it) }
