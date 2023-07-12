@@ -19,6 +19,7 @@ fun MainView(about: String?) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             about?.let { AboutMe(it) }
+            ContactMe()
         }
     }
 }
