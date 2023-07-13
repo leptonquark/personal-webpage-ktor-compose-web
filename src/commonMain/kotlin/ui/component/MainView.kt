@@ -8,11 +8,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import ui.unit.Spacing
 
 @Composable
-fun MainView(about: String?) {
+fun MainView(about: String?, onContactMeClicked: () -> Unit) {
     MaterialTheme {
         Column(
             modifier = Modifier.fillMaxSize().padding(horizontal = Spacing.M),
@@ -20,7 +19,7 @@ fun MainView(about: String?) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             about?.let { AboutMe(it) }
-            ContactMe()
+            ContactMe(onContactMeClicked = onContactMeClicked)
         }
     }
 }

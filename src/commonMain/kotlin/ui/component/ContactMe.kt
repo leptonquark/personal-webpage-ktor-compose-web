@@ -1,6 +1,7 @@
 package ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,23 +18,24 @@ import ui.unit.IconSize
 import ui.unit.Spacing
 
 @Composable
-fun ContactMe() {
+fun ContactMe(onContactMeClicked: () -> Unit) {
     Text(
         text = "Contact me",
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.headlineSmall,
     )
     Row(horizontalArrangement = Arrangement.spacedBy(Spacing.S)) {
-        ContactMeIcon("GitHub", "static/github.png")
-        ContactMeIcon("LinkedIn", "static/linkedin.png")
-        ContactMeIcon("Email", "static/email.png")
+        ContactMeIcon("GitHub", "static/github.png", onClick = onContactMeClicked)
+        ContactMeIcon("LinkedIn", "static/linkedin.png", onClick = onContactMeClicked)
+        ContactMeIcon("Email", "static/email.png", onClick = onContactMeClicked)
     }
 }
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-private fun ContactMeIcon(name: String, iconResource: String) {
+private fun ContactMeIcon(name: String, iconResource: String, onClick: () -> Unit) {
     Column(
+        modifier = Modifier.clickable(onClick = onClick),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(Spacing.XXS),
     ) {
