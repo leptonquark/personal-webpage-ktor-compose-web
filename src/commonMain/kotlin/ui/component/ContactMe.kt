@@ -11,43 +11,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import ui.unit.IconSize
 import ui.unit.Spacing
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun ContactMe() {
     Text(
         text = "Contact me",
         textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.headlineMedium,
+        style = MaterialTheme.typography.headlineSmall,
     )
     Row(horizontalArrangement = Arrangement.spacedBy(Spacing.S)) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(Spacing.XXS),
-        ) {
-            Image(
-                painter = painterResource("static/github.png"),
-                contentDescription = null,
-                modifier = Modifier.size(IconSize.M),
-            )
-            Text(
-                text = "GitHub",
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.labelSmall,
-            )
-        }
-        Text(
-            text = "LinkedIn",
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.labelSmall,
+        ContactMeIcon("GitHub", "static/github.png")
+        ContactMeIcon("LinkedIn", "static/linkedin.png")
+        ContactMeIcon("Email", "static/email.png")
+    }
+}
+
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+private fun ContactMeIcon(name: String, iconResource: String) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(Spacing.XXS),
+    ) {
+        Image(
+            painter = painterResource(iconResource),
+            contentDescription = null,
+            modifier = Modifier.size(IconSize.M),
         )
         Text(
-            text = "Email",
+            text = name,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.labelSmall,
         )
