@@ -19,7 +19,11 @@ class MainScreen @Inject constructor(private val viewModel: MainViewModel) {
         onWasmReady {
             CanvasBasedWindow("CV") {
                 val state by viewModel.state.collectAsState()
-                MainView(about = state.about, onContactMeClicked = { sendIntent(MainIntent.ContactMeClicked) })
+                MainView(
+                    about = state.about,
+                    contactMeItems = state.contactMeItems,
+                    onContactMeClicked = { sendIntent(MainIntent.ContactMeClicked(it)) }
+                )
             }
         }
     }

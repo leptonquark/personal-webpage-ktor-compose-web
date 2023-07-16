@@ -2,6 +2,8 @@ package viewmodel
 
 import ExternalUrlHandler
 import data.AboutRepository
+import data.ContactMeItem
+import data.ContactMeRepository
 import di.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -10,16 +12,20 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import me.tatarka.inject.annotations.Inject
 
-data class MainState(val about: String? = null)
+data class MainState(
+    val about: String? = null,
+    val contactMeItems: List<ContactMeItem> = emptyList(),
+)
 
 sealed interface MainIntent {
-    data object ContactMeClicked : MainIntent
+    data class ContactMeClicked(val contactMeItem: ContactMeItem) : MainIntent
 }
 
 
 @Singleton
 class MainViewModel @Inject constructor(
     private val aboutRepository: AboutRepository,
+    private val contactMeRepository: ContactMeRepository,
     private val externalUrlHandler: ExternalUrlHandler,
 ) {
 
@@ -27,7 +33,8 @@ class MainViewModel @Inject constructor(
 
     val state = flow {
         val about = aboutRepository.getAbout()
-        emit(MainState(about))
+        val contactMeItems = contactMeRepository.getContactMeItems()
+        emit(MainState(about, contactMeItems))
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
@@ -36,7 +43,7 @@ class MainViewModel @Inject constructor(
 
     fun sendIntent(intent: MainIntent) {
         when (intent) {
-            MainIntent.ContactMeClicked -> externalUrlHandler.navigateTo("https://www.linkedin.com/in/justinsaler/")
+            is MainIntent.ContactMeClicked -> externalUrlHandler.navigateTo(intent.contactMeItem.url)
         }
     }
 

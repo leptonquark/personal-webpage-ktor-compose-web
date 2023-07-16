@@ -1,6 +1,7 @@
 package me.justin.application
 
 import data.AboutMessage
+import data.ContactMeItem
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
@@ -61,6 +62,16 @@ private fun Routing.router(title: String, about: String?) {
     }
     get(ApiRoute.ABOUT) {
         call.respond(AboutMessage(about))
+    }
+    get(ApiRoute.CONTACT_ME) {
+        //val file = File("data/contact-me.json")
+        //val response = file.readText()
+        val contactMeItems = listOf(
+            ContactMeItem("LinkedIn", "https://www.linkedin.com/in/justinsaler/", "static/linkedin.png"),
+            ContactMeItem("GitHub", "https://github.com/leptonquark/", "static/github.png"),
+            ContactMeItem("Twitter", "https://twitter.com/Leetkingen/", "static/twitter.png"),
+        )
+        call.respond(contactMeItems)
     }
     static("/static") {
         resources()
