@@ -7,8 +7,6 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
 import io.ktor.server.application.install
-import io.ktor.server.config.ApplicationConfig
-import io.ktor.server.config.ApplicationConfigurationException
 import io.ktor.server.html.respondHtml
 import io.ktor.server.http.content.resources
 import io.ktor.server.http.content.static
@@ -28,7 +26,6 @@ import kotlinx.html.script
 import kotlinx.html.title
 import route.ApiRoute
 
-private const val DEFAULT_TITLE = "CV"
 
 fun HTML.index(title: String) {
     head {
@@ -48,21 +45,14 @@ fun main(args: Array<String>) = EngineMain.main(args)
 
 @Suppress("Unused")
 fun Application.module() {
-    val title = environment.config.getPropertyOrNull("me.title") ?: DEFAULT_TITLE
-    val about = environment.config.getPropertyOrNull("me.about")
-    routing { router(title, about) }
+    val configurationService = ConfigurationService(environment.config)
+    routing { router(configurationService) }
     install(ContentNegotiation) { json() }
 }
 
-private fun Routing.router(title: String, about: String?) {
-    get("/") {
-        call.respondHtml(HttpStatusCode.OK) {
-            index(title = title)
-        }
-    }
-    get(ApiRoute.ABOUT) {
-        call.respond(AboutMessage(about))
-    }
+private fun Routing.router(configurationService: ConfigurationService) {
+    get("/") { call.respondHtml(HttpStatusCode.OK) { index(title = configurationService.title) } }
+    get(ApiRoute.ABOUT) { call.respond(AboutMessage(configurationService.about)) }
     get(ApiRoute.CONTACT_ME) {
         //val file = File("data/contact-me.json")
         //val response = file.readText()
@@ -76,10 +66,4 @@ private fun Routing.router(title: String, about: String?) {
     static("/static") {
         resources()
     }
-}
-
-private fun ApplicationConfig.getPropertyOrNull(path: String) = try {
-    property(path).getString()
-} catch (_: ApplicationConfigurationException) {
-    null
 }
