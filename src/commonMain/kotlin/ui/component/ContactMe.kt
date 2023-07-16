@@ -20,13 +20,15 @@ import ui.unit.Spacing
 
 @Composable
 fun ContactMe(links: List<ContactMeLink>, onContactMeClicked: (ContactMeLink) -> Unit) {
-    Text(
-        text = "Contact me",
-        textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.headlineSmall,
-    )
-    Row(horizontalArrangement = Arrangement.spacedBy(Spacing.S)) {
-        links.forEach { ContactMeIcon(it, onClick = onContactMeClicked) }
+    if (links.isNotEmpty()) {
+        Text(
+            text = "Contact me",
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.headlineSmall,
+        )
+        Row(horizontalArrangement = Arrangement.spacedBy(Spacing.S)) {
+            links.forEach { ContactMeIcon(it, onClick = onContactMeClicked) }
+        }
     }
 }
 
