@@ -14,5 +14,4 @@ class ConfigurationService(private val config: ApplicationConfig) {
     } catch (_: ApplicationConfigurationException) {
         null
     }
-
 }
