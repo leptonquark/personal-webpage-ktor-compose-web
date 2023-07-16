@@ -14,33 +14,11 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
-import kotlinx.html.HTML
-import kotlinx.html.body
-import kotlinx.html.canvas
-import kotlinx.html.div
-import kotlinx.html.head
-import kotlinx.html.id
-import kotlinx.html.script
-import kotlinx.html.title
 import me.justin.application.usecase.getAboutMessage
 import me.justin.application.usecase.getContactMe
 import me.justin.application.usecase.getIndex
 import route.ApiRoute
 
-
-fun HTML.index(title: String) {
-    head {
-        title(title)
-        script { src = "/static/skiko.js" }
-    }
-    body {
-        canvas { id = "ComposeTarget" }
-        div {
-            id = "root"
-        }
-        script(src = "/static/CV.js") {}
-    }
-}
 
 fun main(args: Array<String>) = EngineMain.main(args)
 
