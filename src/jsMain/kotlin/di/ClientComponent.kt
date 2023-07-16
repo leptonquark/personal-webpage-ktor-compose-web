@@ -14,7 +14,7 @@ abstract class ClientComponent {
 
     @Provides
     @Singleton
-    fun httpClient(): HttpClient = HttpClient() {
+    fun httpClient(): HttpClient = HttpClient {
         install(ContentNegotiation) {
             json()
         }

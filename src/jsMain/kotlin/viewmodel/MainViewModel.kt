@@ -2,23 +2,24 @@ package viewmodel
 
 import ExternalUrlHandler
 import data.AboutRepository
-import data.ContactMeItem
+import data.ContactMeLink
 import data.ContactMeRepository
 import di.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import me.tatarka.inject.annotations.Inject
 
 data class MainState(
     val about: String? = null,
-    val contactMeItems: List<ContactMeItem> = emptyList(),
+    val contactMeLinks: List<ContactMeLink> = emptyList(),
 )
 
 sealed interface MainIntent {
-    data class ContactMeClicked(val contactMeItem: ContactMeItem) : MainIntent
+    data class ContactMeClicked(val contactMeLink: ContactMeLink) : MainIntent
 }
 
 
@@ -28,23 +29,21 @@ class MainViewModel @Inject constructor(
     private val contactMeRepository: ContactMeRepository,
     private val externalUrlHandler: ExternalUrlHandler,
 ) {
-
     private val viewModelScope = CoroutineScope(Dispatchers.Main)
 
-    val state = flow {
-        val about = aboutRepository.getAbout()
-        val contactMeItems = contactMeRepository.getContactMeItems()
-        emit(MainState(about, contactMeItems))
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = MainState()
-    )
+    private val aboutFlow = flow { emit(aboutRepository.getAbout()) }
+    private val contactMe = flow { emit(contactMeRepository.getContactMeLinks()) }
+
+    val state = combine(aboutFlow, contactMe) { about, links -> MainState(about, links) }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = MainState()
+        )
 
     fun sendIntent(intent: MainIntent) {
         when (intent) {
-            is MainIntent.ContactMeClicked -> externalUrlHandler.navigateTo(intent.contactMeItem.url)
+            is MainIntent.ContactMeClicked -> externalUrlHandler.navigateTo(intent.contactMeLink.url)
         }
     }
-
 }

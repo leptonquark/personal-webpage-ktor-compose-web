@@ -12,39 +12,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import data.ContactMeItem
+import data.ContactMeLink
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import ui.unit.IconSize
 import ui.unit.Spacing
 
 @Composable
-fun ContactMe(items: List<ContactMeItem>, onContactMeClicked: (ContactMeItem) -> Unit) {
+fun ContactMe(links: List<ContactMeLink>, onContactMeClicked: (ContactMeLink) -> Unit) {
     Text(
         text = "Contact me",
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.headlineSmall,
     )
     Row(horizontalArrangement = Arrangement.spacedBy(Spacing.S)) {
-        items.forEach { ContactMeIcon(it, onClick = onContactMeClicked) }
+        links.forEach { ContactMeIcon(it, onClick = onContactMeClicked) }
     }
 }
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-private fun ContactMeIcon(contactMeItem: ContactMeItem, onClick: (ContactMeItem) -> Unit) {
+private fun ContactMeIcon(contactMeLink: ContactMeLink, onClick: (ContactMeLink) -> Unit) {
     Column(
-        modifier = Modifier.clickable { onClick(contactMeItem) },
+        modifier = Modifier.clickable { onClick(contactMeLink) },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(Spacing.XXS),
     ) {
         Image(
-            painter = painterResource(contactMeItem.icon),
+            painter = painterResource(contactMeLink.icon),
             contentDescription = null,
             modifier = Modifier.size(IconSize.M),
         )
         Text(
-            text = contactMeItem.name,
+            text = contactMeLink.name,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.labelSmall,
         )

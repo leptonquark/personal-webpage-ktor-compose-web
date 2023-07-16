@@ -21,7 +21,7 @@ class MainScreen @Inject constructor(private val viewModel: MainViewModel) {
                 val state by viewModel.state.collectAsState()
                 MainView(
                     about = state.about,
-                    contactMeItems = state.contactMeItems,
+                    contactMeLinks = state.contactMeLinks,
                     onContactMeClicked = { sendIntent(MainIntent.ContactMeClicked(it)) }
                 )
             }
