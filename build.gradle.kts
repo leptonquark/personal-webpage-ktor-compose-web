@@ -67,6 +67,8 @@ kotlin {
                 implementation(compose.ui)
                 implementation(compose.foundation)
                 implementation(compose.material3)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1-wasm0")
 
             }
@@ -78,6 +80,7 @@ kotlin {
                 implementation("io.ktor:ktor-server-content-negotiation")
                 implementation("io.ktor:ktor-serialization-kotlinx-json")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-hocon:1.5.1")
             }
         }
         val jsMain by getting {

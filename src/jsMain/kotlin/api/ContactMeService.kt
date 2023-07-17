@@ -1,6 +1,6 @@
 package api
 
-import data.AboutMessage
+import data.ContactMeLink
 import di.Singleton
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -9,6 +9,6 @@ import me.tatarka.inject.annotations.Inject
 import route.ApiRoute
 
 @Singleton
-class AboutService @Inject constructor(private val client: HttpClient)  {
-        suspend fun getAbout() = client.get(ApiRoute.ABOUT).body<AboutMessage>()
+class ContactMeService @Inject constructor(private val client: HttpClient) {
+        suspend fun getContactMeLinks() = client.get(ApiRoute.CONTACT_ME).body<List<ContactMeLink>>()
 }

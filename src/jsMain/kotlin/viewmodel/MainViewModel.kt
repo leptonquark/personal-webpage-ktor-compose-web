@@ -1,28 +1,49 @@
 package viewmodel
 
+import ExternalUrlHandler
 import data.AboutRepository
+import data.ContactMeLink
+import data.ContactMeRepository
 import di.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.SharingStarted
 import me.tatarka.inject.annotations.Inject
 
-data class MainState(val about: String? = null)
+data class MainState(
+    val about: String? = null,
+    val contactMeLinks: List<ContactMeLink> = emptyList(),
+)
+
+sealed interface MainIntent {
+    data class ContactMeClicked(val contactMeLink: ContactMeLink) : MainIntent
+}
+
 
 @Singleton
-class MainViewModel @Inject constructor(private val aboutRepository: AboutRepository) {
-
+class MainViewModel @Inject constructor(
+    private val aboutRepository: AboutRepository,
+    private val contactMeRepository: ContactMeRepository,
+    private val externalUrlHandler: ExternalUrlHandler,
+) {
     private val viewModelScope = CoroutineScope(Dispatchers.Main)
 
+    private val aboutFlow = flow { emit(aboutRepository.getAbout()) }
+    private val contactMe = flow { emit(contactMeRepository.getContactMeLinks()) }
 
-    val state = flow {
-        val about = aboutRepository.getAbout()
-        emit(MainState(about))
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = MainState()
-    )
+    val state = combine(aboutFlow, contactMe) { about, links -> MainState(about, links) }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = MainState()
+        )
+
+    fun sendIntent(intent: MainIntent) {
+        when (intent) {
+            is MainIntent.ContactMeClicked -> externalUrlHandler.navigateTo(intent.contactMeLink.url)
+        }
+    }
 }
