@@ -1,6 +1,5 @@
-package api
+package contactme
 
-import data.ContactMeLink
 import di.Singleton
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

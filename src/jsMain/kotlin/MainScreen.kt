@@ -1,5 +1,3 @@
-package ui
-
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -7,9 +5,7 @@ import androidx.compose.ui.window.CanvasBasedWindow
 import di.Singleton
 import me.tatarka.inject.annotations.Inject
 import org.jetbrains.skiko.wasm.onWasmReady
-import ui.component.MainView
-import viewmodel.MainIntent
-import viewmodel.MainViewModel
+import ui.MainView
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Singleton

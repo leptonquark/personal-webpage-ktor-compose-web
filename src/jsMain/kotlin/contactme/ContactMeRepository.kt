@@ -1,6 +1,5 @@
-package data
+package contactme
 
-import api.ContactMeService
 import di.Singleton
 import me.tatarka.inject.annotations.Inject
 

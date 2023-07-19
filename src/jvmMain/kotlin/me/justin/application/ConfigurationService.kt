@@ -3,10 +3,6 @@ package me.justin.application
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigException
 import com.typesafe.config.ConfigFactory
-import data.ContactMeLink
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.hocon.Hocon
-import kotlinx.serialization.hocon.decodeFromConfig
 
 private const val DEFAULT_TITLE = "CV"
 
@@ -23,8 +19,7 @@ class ConfigurationService {
     val title get() = config.getStringOrNull(ConfigurationPath.TITLE) ?: DEFAULT_TITLE
     val about get() = config.getStringOrNull(ConfigurationPath.ABOUT)
 
-    val contactMe = config.getListOrNull<ContactMeLink>(ConfigurationPath.CONTACT_ME)
-
+    val contactMe = config.getStringListOrNull(ConfigurationPath.CONTACT_ME) ?: emptyList()
 
     private fun Config.getStringOrNull(path: String) = try {
         getString(path)
@@ -32,10 +27,9 @@ class ConfigurationService {
         null
     }
 
-    @OptIn(ExperimentalSerializationApi::class)
-    private inline fun <reified T> Config.getListOrNull(path: String) = try {
-        getConfigList(path)
+    private fun Config.getStringListOrNull(path: String) = try {
+        getStringList(path)
     } catch (_: ConfigException.Missing) {
         null
-    }?.map { Hocon.decodeFromConfig<T>(it) } ?: emptyList()
+    }
 }

@@ -1,6 +1,5 @@
-package data
+package about
 
-import api.AboutService
 import di.Singleton
 import me.tatarka.inject.annotations.Inject
 

@@ -1,6 +1,5 @@
-package api
+package about
 
-import data.AboutMessage
 import di.Singleton
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
