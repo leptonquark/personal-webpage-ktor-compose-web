@@ -1,9 +1,6 @@
-package viewmodel
-
-import ExternalUrlHandler
-import data.AboutRepository
-import data.ContactMeLink
-import data.ContactMeRepository
+import about.AboutRepository
+import contactme.ContactMeLink
+import contactme.ContactMeRepository
 import di.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

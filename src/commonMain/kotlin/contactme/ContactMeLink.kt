@@ -1,4 +1,4 @@
-package data
+package contactme
 
 import kotlinx.serialization.Serializable
 

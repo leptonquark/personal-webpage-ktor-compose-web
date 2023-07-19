@@ -1,6 +1,6 @@
-package me.justin.application.usecase
+package me.justin.application.usecase.about
 
-import data.AboutMessage
+import about.AboutMessage
 import me.justin.application.ConfigurationService
 
 fun ConfigurationService.getAboutMessage() = AboutMessage(about)

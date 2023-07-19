@@ -1,6 +1,6 @@
-package me.justin.application.usecase
+package me.justin.application.usecase.contactme
 
-import data.ContactMeLink
+import contactme.ContactMeLink
 import me.justin.application.ConfigurationService
 
 fun ConfigurationService.getContactMe() = contactMe.mapNotNull { url ->
