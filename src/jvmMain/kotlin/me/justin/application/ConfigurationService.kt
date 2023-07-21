@@ -14,11 +14,10 @@ private object ConfigurationPath {
 
 class ConfigurationService {
 
-    private val config = ConfigFactory.load()
+    private val config = ConfigFactory.load().withFallback(ConfigFactory.load("application-sample"))
 
     val title get() = config.getStringOrNull(ConfigurationPath.TITLE) ?: DEFAULT_TITLE
     val about get() = config.getStringOrNull(ConfigurationPath.ABOUT)
-
     val contactMe = config.getStringListOrNull(ConfigurationPath.CONTACT_ME) ?: emptyList()
 
     private fun Config.getStringOrNull(path: String) = try {
