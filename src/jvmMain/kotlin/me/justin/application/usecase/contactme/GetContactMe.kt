@@ -3,7 +3,7 @@ package me.justin.application.usecase.contactme
 import contactme.ContactMeLink
 import me.justin.application.data.ConfigurationService
 
-fun ConfigurationService.getContactMe() = contactMe.mapNotNull { url ->
+fun getContactMe(configurationService: ConfigurationService) = configurationService.contactMe.mapNotNull { url ->
     ContactMeWebsite.fromUrl(url)?.let { website ->
         ContactMeLink(
             name = website.siteName,
