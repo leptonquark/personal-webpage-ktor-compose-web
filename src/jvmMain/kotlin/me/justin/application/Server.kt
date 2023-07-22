@@ -14,6 +14,7 @@ import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import me.justin.application.data.ConfigurationService
 import me.justin.application.usecase.about.getAboutMessage
 import me.justin.application.usecase.contactme.getContactMe
 import me.justin.application.usecase.getIndex

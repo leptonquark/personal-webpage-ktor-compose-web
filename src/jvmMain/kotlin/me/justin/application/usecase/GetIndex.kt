@@ -8,7 +8,7 @@ import kotlinx.html.head
 import kotlinx.html.id
 import kotlinx.html.script
 import kotlinx.html.title
-import me.justin.application.ConfigurationService
+import me.justin.application.data.ConfigurationService
 
 fun HTML.getIndex(configurationService: ConfigurationService) {
     head {
@@ -17,9 +17,7 @@ fun HTML.getIndex(configurationService: ConfigurationService) {
     }
     body {
         canvas { id = "ComposeTarget" }
-        div {
-            id = "root"
-        }
+        div { id = "root" }
         script(src = "/static/CV.js") {}
     }
 }

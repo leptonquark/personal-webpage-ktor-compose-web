@@ -1,4 +1,4 @@
-package me.justin.application
+package me.justin.application.data
 
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigException
