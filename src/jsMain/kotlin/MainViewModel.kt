@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import me.tatarka.inject.annotations.Inject
-import project.ProjectList
+import project.Project
 import project.ProjectRepository
 
 data class MainState(
     val about: String? = null,
     val contactMeLinks: List<ContactMeLink> = emptyList(),
-    val projects: ProjectList? = null,
+    val projects: List<Project> = emptyList(),
 )
 
 sealed interface MainIntent {

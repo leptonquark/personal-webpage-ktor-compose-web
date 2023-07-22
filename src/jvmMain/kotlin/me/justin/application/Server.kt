@@ -17,9 +17,11 @@ import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import me.justin.application.data.ConfigurationService
+import me.justin.application.data.JsonService
 import me.justin.application.usecase.about.getAboutMessage
 import me.justin.application.usecase.contactme.getContactMe
 import me.justin.application.usecase.getIndex
+import me.justin.application.usecase.project.getProjects
 import route.ApiRoute
 
 fun main(args: Array<String>) = EngineMain.main(args)
@@ -32,18 +34,14 @@ fun Application.module() {
 
 private fun Routing.router() {
     val configurationService = ConfigurationService()
-    //val jsonService = JsonService()
+    val jsonService = JsonService()
     get("/") { call.respondHtml(HttpStatusCode.OK) { getIndex(configurationService) } }
     get(ApiRoute.ABOUT) { call.respond(getAboutMessage(configurationService)) }
     get(ApiRoute.CONTACT_ME) { call.respond(getContactMe(configurationService)) }
     get(ApiRoute.PROJECTS) {
-        object {}.javaClass.getResource("/projects.json")?.readText()?.let { json ->
-            call.respondText(json, ContentType.Application.Json)
+        getProjects(jsonService)?.let {
+            call.respondText(it, ContentType.Application.Json)
         } ?: call.respond(HttpStatusCode.InternalServerError)
-        /*        call.resolveResource("projects.json") ?.readFrom()?.let { json ->
-            json.readUTF8Line()?.let { call.respondText(it, ContentType.Application.Json) }
-        } ?: call.respond(HttpStatusCode.InternalServerError)
-    }*/
     }
     static("/static") { resources() }
 }
