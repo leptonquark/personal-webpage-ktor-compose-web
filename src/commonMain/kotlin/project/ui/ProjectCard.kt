@@ -1,6 +1,9 @@
 package project.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
@@ -12,9 +15,10 @@ import ui.unit.Spacing
 
 @Composable
 fun ProjectCard(project: Project) {
-    ElevatedCard {
-        Column(modifier = Modifier.padding(Spacing.S)) {
+    ElevatedCard(modifier = Modifier.fillMaxHeight()) {
+        Column(modifier = Modifier.padding(Spacing.S).fillMaxHeight()) {
             Text(text = project.projectName, style = MaterialTheme.typography.headlineMedium)
+            Spacer(modifier = Modifier.height(Spacing.XS))
             Text(text = project.client, style = MaterialTheme.typography.titleMedium)
             Text(text = project.description, style = MaterialTheme.typography.bodyMedium)
         }
