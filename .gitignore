@@ -84,3 +84,4 @@ gradle/
 kotlin-js-store/
 .idea/
 application.conf
+projects.json

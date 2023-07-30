@@ -9,10 +9,13 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import me.tatarka.inject.annotations.Inject
+import project.Project
+import project.ProjectRepository
 
 data class MainState(
     val about: String? = null,
     val contactMeLinks: List<ContactMeLink> = emptyList(),
+    val projects: List<Project> = emptyList(),
 )
 
 sealed interface MainIntent {
@@ -24,14 +27,16 @@ sealed interface MainIntent {
 class MainViewModel @Inject constructor(
     private val aboutRepository: AboutRepository,
     private val contactMeRepository: ContactMeRepository,
+    private val projectRepository: ProjectRepository,
     private val externalUrlHandler: ExternalUrlHandler,
 ) {
     private val viewModelScope = CoroutineScope(Dispatchers.Main)
 
     private val aboutFlow = flow { emit(aboutRepository.getAbout()) }
     private val contactMe = flow { emit(contactMeRepository.getContactMeLinks()) }
+    private val projects = flow { emit(projectRepository.getProjects()) }
 
-    val state = combine(aboutFlow, contactMe) { about, links -> MainState(about, links) }
+    val state = combine(aboutFlow, contactMe, projects) { about, links, projects -> MainState(about, links, projects) }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,
