@@ -9,10 +9,13 @@ import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
 import me.justin.application.data.ConfigurationService
 import me.justin.application.data.JsonService
+import me.justin.application.usecase.STYLES
 import me.justin.application.usecase.about.getAboutMessage
 import me.justin.application.usecase.contactme.getContactMe
 import me.justin.application.usecase.getIndex
+import me.justin.application.usecase.getStyles
 import me.justin.application.usecase.project.getProjects
+import me.justin.application.usecase.respondCss
 import route.ApiRoute
 
 fun Routing.router() {
@@ -22,5 +25,7 @@ fun Routing.router() {
     get(ApiRoute.ABOUT) { call.respond(getAboutMessage(configurationService)) }
     get(ApiRoute.CONTACT_ME) { call.respond(getContactMe(configurationService)) }
     get(ApiRoute.PROJECTS) { call.respond(getProjects(jsonService)) }
+    get(STYLES) { call.respondCss { getStyles() } }
     staticResources("/static", "/")
 }
+
