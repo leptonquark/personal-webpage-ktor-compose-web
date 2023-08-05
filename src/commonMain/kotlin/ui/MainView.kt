@@ -22,11 +22,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import contactme.ContactMeLink
 import contactme.ui.ContactMe
 import project.Project
 import project.ui.ProjectCard
+import ui.unit.BorderWidth
 import ui.unit.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,7 +35,7 @@ fun MainView(
     about: String?,
     contactMeLinks: List<ContactMeLink>,
     projects: List<Project>,
-    onContactMeClicked: (ContactMeLink) -> Unit
+    onContactMeClicked: (ContactMeLink) -> Unit,
 ) {
     MaterialTheme {
         Scaffold(
@@ -54,7 +54,7 @@ fun MainView(
                 item(span = { GridItemSpan(maxLineSpan) }) {
                     ContactMe(
                         links = contactMeLinks,
-                        onContactMeClicked = onContactMeClicked
+                        onContactMeClicked = onContactMeClicked,
                     )
                 }
             }
@@ -66,11 +66,11 @@ fun MainView(
 private fun TopBar() {
     Surface(
         modifier = Modifier.fillMaxWidth(),
-        border = BorderStroke(1.dp, Color.Black)
+        border = BorderStroke(BorderWidth.S, Color.Black),
     ) {
         Row(
-            modifier = Modifier.padding(vertical = Spacing.XS).fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            modifier = Modifier.padding(vertical = Spacing.S).fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
         ) {
             Text("Justin Salér", style = MaterialTheme.typography.headlineLarge)
         }
