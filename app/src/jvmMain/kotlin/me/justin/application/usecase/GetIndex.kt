@@ -20,6 +20,6 @@ fun HTML.getIndex(configurationService: ConfigurationService) {
     body {
         canvas { id = "ComposeTarget" }
         div { id = "root" }
-        script(src = "/static/CV.js") {}
+        script(src = "/static/app.js") {}
     }
 }

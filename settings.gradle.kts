@@ -28,3 +28,4 @@ plugins {
 }
 
 rootProject.name = "CV"
+include("app")
