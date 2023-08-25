@@ -75,10 +75,15 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-hocon:1.5.1")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-css:1.0.0-pre.602")
-
             }
         }
+
+        val jsWasmMain by creating {
+            dependsOn(commonMain)
+        }
+
         val jsMain by getting {
+            dependsOn(jsWasmMain)
             dependencies {
                 implementation("io.ktor:ktor-client-core")
                 implementation("io.ktor:ktor-client-js")
@@ -90,6 +95,7 @@ kotlin {
             }
         }
         val wasmMain by getting {
+            dependsOn(jsWasmMain)
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core-wasm:1.5.1-wasm0")
 
