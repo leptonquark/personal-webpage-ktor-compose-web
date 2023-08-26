@@ -3,7 +3,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
 import di.Singleton
-import kotlinx.browser.window
 import me.tatarka.inject.annotations.Inject
 import org.jetbrains.skiko.wasm.onWasmReady
 import ui.MainView
@@ -25,9 +24,6 @@ class MainScreen @Inject constructor(private val viewModel: MainViewModel) {
                 ) { sendIntent(MainIntent.ContactMeClicked(it)) }
             }
         }
-        window.addEventListener("resize", { _ ->
-            viewModel.sendIntent(MainIntent.WindowResized)
-        })
     }
 
     private fun sendIntent(state: MainIntent) = viewModel.sendIntent(state)

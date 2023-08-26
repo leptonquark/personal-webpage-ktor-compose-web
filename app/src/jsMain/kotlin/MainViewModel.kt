@@ -2,6 +2,7 @@ import about.AboutRepository
 import contactme.ContactMeLink
 import contactme.ContactMeRepository
 import di.Singleton
+import kotlinx.browser.window
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +24,6 @@ data class MainState(
 
 sealed interface MainIntent {
     data class ContactMeClicked(val contactMeLink: ContactMeLink) : MainIntent
-    data object WindowResized : MainIntent
 }
 
 
@@ -55,10 +55,13 @@ class MainViewModel @Inject constructor(
             initialValue = MainState()
         )
 
+    init {
+        window.addEventListener("resize", { _ -> windowClass.value = WindowClass.getCurrent() })
+    }
+
     fun sendIntent(intent: MainIntent) {
         when (intent) {
             is MainIntent.ContactMeClicked -> externalUrlHandler.navigateTo(intent.contactMeLink.url)
-            MainIntent.WindowResized -> windowClass.value = WindowClass.getCurrent()
         }
     }
 }
