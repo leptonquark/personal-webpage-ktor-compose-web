@@ -1,4 +1,4 @@
 package ui
 
-expect fun getWindowWidth(): Int
+expect val windowWidth: Int
 

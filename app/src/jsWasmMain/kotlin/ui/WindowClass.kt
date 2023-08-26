@@ -5,7 +5,7 @@ enum class WindowClass {
 
     companion object {
         @Suppress("MagicNumber")
-        operator fun invoke() = when (getWindowWidth()) {
+        operator fun invoke() = when (windowWidth) {
             in 0..<600 -> Compact
             in 600..840 -> Medium
             else -> Expanded

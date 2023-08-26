@@ -3,4 +3,4 @@ package ui
 import kotlinx.browser.document
 import kotlinx.browser.window
 
-actual fun getWindowWidth(): Int = document.documentElement?.clientWidth ?: window.innerWidth
+actual val windowWidth get(): Int = document.documentElement?.clientWidth ?: window.innerWidth
