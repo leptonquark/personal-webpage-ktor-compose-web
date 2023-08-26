@@ -20,7 +20,7 @@ class MainScreen @Inject constructor(private val viewModel: MainViewModel) {
                     about = state.about,
                     contactMeLinks = state.contactMeLinks,
                     projects = state.projects,
-                    windowClass = WindowClass.getCurrent()
+                    windowClass = WindowClass.invoke()
                 ) { sendIntent(MainIntent.ContactMeClicked(it)) }
             }
         }

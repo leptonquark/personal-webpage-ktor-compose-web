@@ -1,11 +1,10 @@
 import about.AboutRepository
+import concurrency.eventFlow
 import contactme.ContactMeLink
 import contactme.ContactMeRepository
 import di.Singleton
-import kotlinx.browser.window
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
@@ -19,7 +18,7 @@ data class MainState(
     val about: String? = null,
     val contactMeLinks: List<ContactMeLink> = emptyList(),
     val projects: List<Project> = emptyList(),
-    val windowClass: WindowClass = WindowClass.getCurrent(),
+    val windowClass: WindowClass = WindowClass(),
 )
 
 sealed interface MainIntent {
@@ -39,7 +38,7 @@ class MainViewModel @Inject constructor(
     private val aboutFlow = flow { emit(aboutRepository.getAbout()) }
     private val contactMe = flow { emit(contactMeRepository.getContactMeLinks()) }
     private val projects = flow { emit(projectRepository.getProjects()) }
-    private val windowClass = MutableStateFlow(WindowClass.getCurrent())
+    private val windowClass = eventFlow("resize", WindowClass()) { WindowClass() }
 
     val state = combine(aboutFlow, contactMe, projects, windowClass) { about, links, projects, windowClass ->
         MainState(
@@ -54,10 +53,6 @@ class MainViewModel @Inject constructor(
             started = SharingStarted.Eagerly,
             initialValue = MainState()
         )
-
-    init {
-        window.addEventListener("resize", { _ -> windowClass.value = WindowClass.getCurrent() })
-    }
 
     fun sendIntent(intent: MainIntent) {
         when (intent) {
