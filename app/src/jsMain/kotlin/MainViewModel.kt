@@ -4,6 +4,7 @@ import contactme.ContactMeRepository
 import di.Singleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
@@ -11,15 +12,18 @@ import kotlinx.coroutines.flow.stateIn
 import me.tatarka.inject.annotations.Inject
 import project.Project
 import project.ProjectRepository
+import ui.WindowClass
 
 data class MainState(
     val about: String? = null,
     val contactMeLinks: List<ContactMeLink> = emptyList(),
     val projects: List<Project> = emptyList(),
+    val windowClass: WindowClass = WindowClass.getCurrent(),
 )
 
 sealed interface MainIntent {
     data class ContactMeClicked(val contactMeLink: ContactMeLink) : MainIntent
+    data object WindowResized : MainIntent
 }
 
 
@@ -35,8 +39,16 @@ class MainViewModel @Inject constructor(
     private val aboutFlow = flow { emit(aboutRepository.getAbout()) }
     private val contactMe = flow { emit(contactMeRepository.getContactMeLinks()) }
     private val projects = flow { emit(projectRepository.getProjects()) }
+    private val windowClass = MutableStateFlow(WindowClass.getCurrent())
 
-    val state = combine(aboutFlow, contactMe, projects) { about, links, projects -> MainState(about, links, projects) }
+    val state = combine(aboutFlow, contactMe, projects, windowClass) { about, links, projects, windowClass ->
+        MainState(
+            about,
+            links,
+            projects,
+            windowClass
+        )
+    }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,
@@ -46,6 +58,7 @@ class MainViewModel @Inject constructor(
     fun sendIntent(intent: MainIntent) {
         when (intent) {
             is MainIntent.ContactMeClicked -> externalUrlHandler.navigateTo(intent.contactMeLink.url)
+            MainIntent.WindowResized -> windowClass.value = WindowClass.getCurrent()
         }
     }
 }

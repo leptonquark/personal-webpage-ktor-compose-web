@@ -6,14 +6,11 @@ enum class WindowClass {
     companion object {
 
         @Suppress("MagicNumber")
-        fun fromWindowWidth() = when (windowWidth) {
+        fun getCurrent() = when (getWindowWidth()) {
             in 0..<600 -> Compact
             in 600..840 -> Medium
             else -> Expanded
         }
     }
 }
-
-expect val windowWidth: Int
-
 

@@ -27,11 +27,12 @@ fun MainView(
     about: String?,
     contactMeLinks: List<ContactMeLink>,
     projects: List<Project>,
+    windowClass: WindowClass,
     onContactMeClicked: (ContactMeLink) -> Unit,
 ) {
     MaterialTheme {
         Scaffold(
-            topBar = { TopBar(contactMeLinks, onContactMeClicked) },
+            topBar = { TopBar(contactMeLinks, windowClass, onContactMeClicked) },
         ) { paddingValues ->
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),

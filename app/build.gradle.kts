@@ -43,6 +43,7 @@ kotlin {
         }
         binaries.executable()
     }
+
     sourceSets.forEach {
         it.dependencies {
             val ktorVersion: String by project
@@ -147,5 +148,11 @@ configurations.all {
 
 detekt {
     config.setFrom("detekt-config.yml")
-    source.setFrom("src/commonMain/kotlin", "src/jsMain/kotlin", "src/jvmMain/kotlin", "src/wasmMain/kotlin")
+    source.setFrom(
+        "src/commonMain/kotlin",
+        "src/jsWasmMain/kotlin",
+        "src/jsMain/kotlin",
+        "src/jvmMain/kotlin",
+        "src/wasmMain/kotlin"
+    )
 }

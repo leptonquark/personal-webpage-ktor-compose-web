@@ -17,7 +17,11 @@ import ui.unit.BorderWidth
 import ui.unit.Spacing
 
 @Composable
-internal fun TopBar(contactMeLinks: List<ContactMeLink>, onContactMeClicked: (ContactMeLink) -> Unit) {
+internal fun TopBar(
+    contactMeLinks: List<ContactMeLink>,
+    windowClass: WindowClass,
+    onContactMeClicked: (ContactMeLink) -> Unit,
+) {
     Surface(
         modifier = Modifier.fillMaxWidth(),
         border = BorderStroke(BorderWidth.S, Color.Black),
@@ -27,7 +31,7 @@ internal fun TopBar(contactMeLinks: List<ContactMeLink>, onContactMeClicked: (Co
         ) {
             Text(
                 modifier = Modifier.align(Alignment.Center),
-                text = "Justin Salér",
+                text = windowClass.toString(),
                 style = MaterialTheme.typography.headlineLarge
             )
             ContactMe(
