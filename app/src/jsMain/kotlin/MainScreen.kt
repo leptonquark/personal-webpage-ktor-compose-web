@@ -6,7 +6,6 @@ import di.Singleton
 import me.tatarka.inject.annotations.Inject
 import org.jetbrains.skiko.wasm.onWasmReady
 import ui.MainView
-import ui.WindowClass
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Singleton
@@ -17,10 +16,10 @@ class MainScreen @Inject constructor(private val viewModel: MainViewModel) {
             CanvasBasedWindow("CV") {
                 val state by viewModel.state.collectAsState()
                 MainView(
+                    windowClass = state.windowClass,
                     about = state.about,
                     contactMeLinks = state.contactMeLinks,
                     projects = state.projects,
-                    windowClass = WindowClass.invoke()
                 ) { sendIntent(MainIntent.ContactMeClicked(it)) }
             }
         }

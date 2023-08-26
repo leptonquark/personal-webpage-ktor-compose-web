@@ -18,8 +18,8 @@ import ui.unit.Spacing
 
 @Composable
 internal fun TopBar(
-    contactMeLinks: List<ContactMeLink>,
     windowClass: WindowClass,
+    contactMeLinks: List<ContactMeLink>,
     onContactMeClicked: (ContactMeLink) -> Unit,
 ) {
     Surface(
@@ -34,11 +34,13 @@ internal fun TopBar(
                 text = windowClass.toString(),
                 style = MaterialTheme.typography.headlineLarge
             )
-            ContactMe(
-                modifier = Modifier.align(Alignment.CenterEnd),
-                links = contactMeLinks,
-                onContactMeClicked = onContactMeClicked
-            )
+            if (windowClass == WindowClass.Medium || windowClass == WindowClass.Expanded) {
+                ContactMe(
+                    modifier = Modifier.align(Alignment.CenterEnd),
+                    links = contactMeLinks,
+                    onContactMeClicked = onContactMeClicked
+                )
+            }
         }
     }
 }

@@ -15,10 +15,10 @@ import project.ProjectRepository
 import ui.WindowClass
 
 data class MainState(
+    val windowClass: WindowClass = WindowClass(),
     val about: String? = null,
     val contactMeLinks: List<ContactMeLink> = emptyList(),
     val projects: List<Project> = emptyList(),
-    val windowClass: WindowClass = WindowClass(),
 )
 
 sealed interface MainIntent {
@@ -35,17 +35,17 @@ class MainViewModel @Inject constructor(
 ) {
     private val viewModelScope = CoroutineScope(Dispatchers.Main)
 
+    private val windowClass = eventFlow("resize", WindowClass()) { WindowClass() }
     private val aboutFlow = flow { emit(aboutRepository.getAbout()) }
     private val contactMe = flow { emit(contactMeRepository.getContactMeLinks()) }
     private val projects = flow { emit(projectRepository.getProjects()) }
-    private val windowClass = eventFlow("resize", WindowClass()) { WindowClass() }
 
-    val state = combine(aboutFlow, contactMe, projects, windowClass) { about, links, projects, windowClass ->
+    val state = combine(windowClass, aboutFlow, contactMe, projects) { windowClass, about, links, projects ->
         MainState(
+            windowClass,
             about,
             links,
-            projects,
-            windowClass
+            projects
         )
     }
         .stateIn(
