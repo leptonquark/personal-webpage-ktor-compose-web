@@ -20,7 +20,7 @@ fun ContactMe(links: List<ContactMeLink>, onContactMeClicked: (ContactMeLink) ->
     if (links.isNotEmpty()) {
         Row(
             modifier = modifier,
-            horizontalArrangement = Arrangement.spacedBy(Spacing.S)
+            horizontalArrangement = Arrangement.spacedBy(Spacing.XS)
         ) {
             links.forEach { ContactMeIcon(it, onClick = onContactMeClicked) }
         }
