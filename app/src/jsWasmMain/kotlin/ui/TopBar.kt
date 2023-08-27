@@ -1,10 +1,11 @@
 package ui
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,21 +27,24 @@ internal fun TopBar(
         modifier = Modifier.fillMaxWidth(),
         border = BorderStroke(BorderWidth.S, Color.Black),
     ) {
-        Box(
-            modifier = Modifier.padding(vertical = Spacing.S, horizontal = Spacing.M).fillMaxWidth(),
+        Row(
+            modifier = Modifier.padding(Spacing.S).fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                modifier = Modifier.align(Alignment.Center),
                 text = "Justin Salér",
-                style = MaterialTheme.typography.headlineLarge
+                style = when (windowClass) {
+                    WindowClass.Compact -> typography.headlineMedium
+                    WindowClass.Medium,
+                    WindowClass.Expanded,
+                    -> typography.headlineLarge
+                },
             )
-            if (windowClass == WindowClass.Medium || windowClass == WindowClass.Expanded) {
-                ContactMe(
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                    links = contactMeLinks,
-                    onContactMeClicked = onContactMeClicked
-                )
-            }
+            ContactMe(
+                links = contactMeLinks,
+                onContactMeClicked = onContactMeClicked
+            )
         }
     }
 }
