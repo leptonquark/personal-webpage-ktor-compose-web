@@ -10,14 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import contactme.ContactMeLink
-import contactme.ui.ContactMe
+import contactme.ui.ContactMeIcon
 import ui.unit.BorderWidth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun TopBar(
     windowClass: WindowClass,
-    contactMeLinks: List<ContactMeLink>,
+    links: List<ContactMeLink>,
     onContactMeClicked: (ContactMeLink) -> Unit,
 ) {
     TopAppBar(
@@ -34,10 +34,7 @@ internal fun TopBar(
             )
         },
         actions = {
-            ContactMe(
-                links = contactMeLinks,
-                onContactMeClicked = onContactMeClicked
-            )
+            links.forEach { ContactMeIcon(it, onClick = onContactMeClicked) }
         },
     )
     /*
