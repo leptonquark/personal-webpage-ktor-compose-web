@@ -31,7 +31,7 @@ internal fun TopBar(
         ) {
             Text(
                 modifier = Modifier.align(Alignment.Center),
-                text = windowClass.toString(),
+                text = "Justin Salér",
                 style = MaterialTheme.typography.headlineLarge
             )
             if (windowClass == WindowClass.Medium || windowClass == WindowClass.Expanded) {
