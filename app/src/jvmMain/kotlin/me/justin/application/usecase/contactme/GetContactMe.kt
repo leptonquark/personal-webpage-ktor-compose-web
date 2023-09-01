@@ -1,17 +1,20 @@
 package me.justin.application.usecase.contactme
 
 import contactme.ContactMeLink
-import me.justin.application.data.ConfigurationService
+import me.justin.application.data.MainContentService
 
-fun getContactMe(configurationService: ConfigurationService) = configurationService.contactMe.mapNotNull { url ->
-    ContactMeWebsite.fromUrl(url)?.let { website ->
-        ContactMeLink(
-            name = website.siteName,
-            url = url,
-            icon = website.icon,
-        )
-    }
-}
+fun getContactMe(mainContentService: MainContentService) =
+    mainContentService.mainContent?.run {
+        contactMe.mapNotNull { url ->
+            ContactMeWebsite.fromUrl(url)?.let { website ->
+                ContactMeLink(
+                    name = website.siteName,
+                    url = url,
+                    icon = website.icon,
+                )
+            }
+        }
+    }.orEmpty()
 
 private enum class ContactMeWebsite {
     Github,
