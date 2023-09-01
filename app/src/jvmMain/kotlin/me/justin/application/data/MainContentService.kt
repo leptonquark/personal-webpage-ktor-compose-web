@@ -11,7 +11,5 @@ data class MainContent(
 )
 
 class MainContentService : JsonService("/main-content.json", "/main-content-sample.json") {
-    val mainContent: MainContent?
-        get() = resource?.readText()?.fromJson<MainContent>()
-
+    val mainContent: MainContent? get() = resource?.readText()?.fromJson<MainContent>()
 }
