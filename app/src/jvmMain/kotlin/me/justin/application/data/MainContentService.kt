@@ -1,10 +1,7 @@
 package me.justin.application.data
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import me.justin.application.util.fromJson
-import project.ProjectList
-import java.net.URL
 
 @Serializable
 data class MainContent(
