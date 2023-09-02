@@ -1,15 +1,12 @@
 package ui
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.typography
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import contactme.ContactMeLink
 import contactme.ui.ContactMeIcon
-import ui.unit.BorderWidth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
