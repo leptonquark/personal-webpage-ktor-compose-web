@@ -1,4 +1,4 @@
-package me.justin.application.util
+package me.leptonquark.application.util
 
 import kotlinx.serialization.json.Json
 

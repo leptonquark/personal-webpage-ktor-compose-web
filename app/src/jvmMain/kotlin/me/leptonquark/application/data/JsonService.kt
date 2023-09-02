@@ -1,4 +1,4 @@
-package me.justin.application.data
+package me.leptonquark.application.data
 
 import java.net.URL
 

@@ -1,7 +1,7 @@
-package me.justin.application.usecase.contactme
+package me.leptonquark.application.usecase.contactme
 
 import contactme.ContactMeLink
-import me.justin.application.data.MainContentService
+import me.leptonquark.application.data.MainContentService
 
 fun getContactMe(mainContentService: MainContentService) =
     mainContentService.mainContent?.run {

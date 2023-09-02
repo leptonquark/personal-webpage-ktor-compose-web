@@ -1,6 +1,6 @@
-package me.justin.application.usecase
+package me.leptonquark.application.usecase
 
-import me.justin.application.data.MainContentService
+import me.leptonquark.application.data.MainContentService
 
 private const val DEFAULT_TITLE = "CV"
 fun getTitle(mainContentService: MainContentService) = mainContentService.mainContent?.title ?: DEFAULT_TITLE

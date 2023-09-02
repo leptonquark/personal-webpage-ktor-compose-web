@@ -1,4 +1,4 @@
-package me.justin.application.usecase
+package me.leptonquark.application.usecase
 
 import io.ktor.http.ContentType
 import io.ktor.server.application.ApplicationCall

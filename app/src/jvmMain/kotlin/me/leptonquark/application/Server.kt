@@ -1,4 +1,4 @@
-package me.justin.application
+package me.leptonquark.application
 
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application

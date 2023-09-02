@@ -1,7 +1,7 @@
-package me.justin.application.data
+package me.leptonquark.application.data
 
 import kotlinx.serialization.Serializable
-import me.justin.application.util.fromJson
+import me.leptonquark.application.util.fromJson
 
 @Serializable
 data class MainContent(
