@@ -12,11 +12,11 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import ui.theme.AppTheme
 import contactme.ContactMeLink
 import project.Project
 import project.ui.ProjectCard
@@ -31,7 +31,7 @@ internal fun MainView(
     projects: List<Project>,
     onContactMeClicked: (ContactMeLink) -> Unit,
 ) {
-    MaterialTheme {
+    AppTheme {
         Scaffold(
             topBar = { TopBar(windowClass, contactMeLinks, onContactMeClicked) },
         ) { paddingValues ->
