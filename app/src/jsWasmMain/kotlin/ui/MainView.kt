@@ -18,11 +18,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import ui.theme.AppTheme
 import contactme.ContactMeLink
 import project.Project
 import project.ui.ProjectCard
 import project.ui.ProjectListItem
+import ui.theme.AppTheme
 import ui.unit.Spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,7 +61,7 @@ private fun MainContentCompact(
         verticalArrangement = Arrangement.spacedBy(Spacing.S, Alignment.CenterVertically),
     ) {
         item { Spacer(modifier = Modifier.height(Spacing.S)) }
-        item{ about?.let { AboutMe(it) } }
+        item { about?.let { AboutMe(it) } }
         item { Spacer(modifier = Modifier.height(Spacing.M)) }
         items(projects) { ProjectListItem(project = it) }
         item { Spacer(modifier = Modifier.height(Spacing.M)) }

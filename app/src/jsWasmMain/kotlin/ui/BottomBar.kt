@@ -8,18 +8,31 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import ui.unit.Spacing
 
 @Composable
-fun BottomBar(){
+fun BottomBar() {
+    val message = buildAnnotatedString {
+        append(
+            "This webpage uses Kotlin Multiplatform, KTOR, Kotlin/JS, Compose for Web (experimental) and Kotlin/WASM (experimental). The source code is "
+        )
+        withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+            append("available on GitHub.")
+        }
+    }
+
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RectangleShape) {
+        shape = RectangleShape
+    ) {
         Text(
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth().padding(Spacing.XS),
-            text = "This webpage uses Kotlin Multiplatform, KTOR, Kotlin/JS, Compose for Web (experimental) and Kotlin/WASM (experimental). The source code is available on GitHub.",
+            text = message,
             style = MaterialTheme.typography.bodySmall,
         )
     }
