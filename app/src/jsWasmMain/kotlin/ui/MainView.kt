@@ -37,6 +37,7 @@ internal fun MainView(
     AppTheme {
         Scaffold(
             topBar = { TopBar(windowClass, contactMeLinks, onContactMeClicked) },
+            bottomBar = { BottomBar() },
         ) { paddingValues ->
             when (windowClass) {
                 WindowClass.Compact -> MainContentCompact(paddingValues, about, projects)
