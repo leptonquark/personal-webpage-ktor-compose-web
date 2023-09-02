@@ -9,11 +9,11 @@ import kotlinx.html.id
 import kotlinx.html.link
 import kotlinx.html.script
 import kotlinx.html.title
-import me.justin.application.data.ConfigurationService
+import me.justin.application.data.MainContentService
 
-fun HTML.getIndex(configurationService: ConfigurationService) {
+fun HTML.getIndex(mainContentService: MainContentService) {
     head {
-        title(configurationService.title)
+        title(getTitle(mainContentService))
         link(rel = "stylesheet", href = "/styles.css", type = "text/css")
         script { src = "/static/skiko.js" }
     }
@@ -23,3 +23,4 @@ fun HTML.getIndex(configurationService: ConfigurationService) {
         script(src = "/static/app.js") {}
     }
 }
+

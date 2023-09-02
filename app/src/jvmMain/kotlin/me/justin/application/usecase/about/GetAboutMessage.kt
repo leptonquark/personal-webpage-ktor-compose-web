@@ -1,6 +1,6 @@
 package me.justin.application.usecase.about
 
 import about.AboutMessage
-import me.justin.application.data.ConfigurationService
+import me.justin.application.data.MainContentService
 
-fun getAboutMessage(configurationService: ConfigurationService) = AboutMessage(configurationService.about)
+fun getAboutMessage(mainContentService: MainContentService) = AboutMessage(mainContentService.mainContent?.about)
