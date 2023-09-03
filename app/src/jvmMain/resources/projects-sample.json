@@ -1,7 +1,7 @@
 {
   "projects": [
     {
-      "client": "FictionalCorp (Consultant from ImaginaryConsulting)",
+      "client": "FictionalCorp",
       "projectName": "NextGen AI Assistant",
       "description": "FictionalCorp develops an advanced AI assistant that utilizes cutting-edge natural language processing and machine learning algorithms. As a Senior AI Engineer, I contributed to the development of new AI features, optimized existing algorithms, and integrated the AI assistant into various platforms and devices.",
       "company": "ImaginaryConsulting",
@@ -12,7 +12,7 @@
       "endDate": "Current"
     },
     {
-      "client": "TechRevolution Inc. (Consultant from InnovateTech)",
+      "client": "TechRevolution Inc.",
       "projectName": "Quantum Computing Research",
       "description": "Engaged in quantum computing research at TechRevolution Inc. Working alongside a team of brilliant researchers, I focused on developing quantum algorithms and simulations, exploring potential applications in cryptography and optimization problems.",
       "company": "InnovateTech",
@@ -23,7 +23,7 @@
       "endDate": "31/12/2022"
     },
     {
-      "client": "GlobalBank (Consultant from DigitalSolutions)",
+      "client": "GlobalBank",
       "projectName": "Blockchain Integration",
       "description": "Collaborated with GlobalBank's innovation team to implement blockchain technology into their existing financial systems. As a Blockchain Developer, I contributed to the design and implementation of smart contracts and decentralized applications, streamlining various financial processes.",
       "company": "DigitalSolutions",
