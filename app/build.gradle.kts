@@ -122,8 +122,6 @@ compose {
     val kotlinVersion: String by project
 
     kotlinCompilerPlugin.set(composeVersion)
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
-
 }
 
 tasks.named<Copy>("jvmProcessResources") {

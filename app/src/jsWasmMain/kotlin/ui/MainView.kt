@@ -20,11 +20,12 @@ internal fun MainView(
     contactMeLinks: List<ContactMeLink>,
     projects: List<Project>,
     onContactMeClicked: (ContactMeLink) -> Unit,
+    onBottomBarClicked: () -> Unit,
 ) {
     AppTheme {
         Scaffold(
             topBar = { TopBar(windowClass, title, contactMeLinks, onContactMeClicked) },
-            bottomBar = { BottomBar() },
+            bottomBar = { BottomBar(onBottomBarClicked) },
         ) { paddingValues ->
             MainContent(
                 windowClass = windowClass,

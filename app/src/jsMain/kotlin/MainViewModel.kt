@@ -25,6 +25,7 @@ data class MainState(
 
 sealed interface MainIntent {
     data class ContactMeClicked(val contactMeLink: ContactMeLink) : MainIntent
+    data object BottomBarClicked : MainIntent
 }
 
 
@@ -63,6 +64,7 @@ class MainViewModel @Inject constructor(
     fun sendIntent(intent: MainIntent) {
         when (intent) {
             is MainIntent.ContactMeClicked -> externalUrlHandler.navigateTo(intent.contactMeLink.url)
+            MainIntent.BottomBarClicked -> externalUrlHandler.navigateTo("https://github.com/leptonquark/me")
         }
     }
 }
