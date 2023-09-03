@@ -73,7 +73,7 @@ kotlin {
                 implementation("io.ktor:ktor-server-content-negotiation")
                 implementation("io.ktor:ktor-serialization-kotlinx-json")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-css:1.0.0-pre.602")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-css:1.0.0-pre.623")
             }
         }
 
