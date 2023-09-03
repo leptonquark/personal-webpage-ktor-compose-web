@@ -29,6 +29,8 @@ sealed interface MainIntent {
 }
 
 
+private const val SOURCE_CODE_URL = "https://github.com/leptonquark/me"
+
 @Singleton
 class MainViewModel @Inject constructor(
     private val titleRepository: TitleRepository,
@@ -64,7 +66,7 @@ class MainViewModel @Inject constructor(
     fun sendIntent(intent: MainIntent) {
         when (intent) {
             is MainIntent.ContactMeClicked -> externalUrlHandler.navigateTo(intent.contactMeLink.url)
-            MainIntent.BottomBarClicked -> externalUrlHandler.navigateTo("https://github.com/leptonquark/me")
+            MainIntent.BottomBarClicked -> externalUrlHandler.navigateTo(SOURCE_CODE_URL)
         }
     }
 }
