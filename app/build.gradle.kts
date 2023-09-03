@@ -63,7 +63,7 @@ kotlin {
                 implementation(compose.material3)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1-wasm0")
             }
         }
         val jvmMain by getting {
@@ -89,7 +89,6 @@ kotlin {
                 implementation("io.ktor:ktor-client-js")
                 implementation("io.ktor:ktor-client-content-negotiation")
                 implementation("io.ktor:ktor-serialization-kotlinx-json")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
                 implementation("me.tatarka.inject:kotlin-inject-runtime:$kotlinInjectVersion")
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
             }
