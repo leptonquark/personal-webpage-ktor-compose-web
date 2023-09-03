@@ -1,6 +1,6 @@
-package me.justin.application.data
+package me.leptonquark.application.data
 
-import me.justin.application.util.fromJson
+import me.leptonquark.application.util.fromJson
 import project.ProjectList
 
 class ProjectService : JsonService("/projects.json", "/projects-sample.json") {

@@ -1,4 +1,4 @@
-package me.justin.application.usecase
+package me.leptonquark.application.usecase
 
 import kotlinx.html.HTML
 import kotlinx.html.body
@@ -9,7 +9,7 @@ import kotlinx.html.id
 import kotlinx.html.link
 import kotlinx.html.script
 import kotlinx.html.title
-import me.justin.application.data.MainContentService
+import me.leptonquark.application.data.MainContentService
 
 fun HTML.getIndex(mainContentService: MainContentService) {
     head {

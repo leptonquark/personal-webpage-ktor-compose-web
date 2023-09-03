@@ -9,7 +9,7 @@ plugins {
     application
 }
 
-group = "me.justin"
+group = "me.leptonquark"
 version = "1.0"
 
 
@@ -19,7 +19,7 @@ kotlin {
         withJava()
     }
     js {
-        moduleName = "justinsaler"
+        moduleName = "CV"
         binaries.executable()
         browser {
             commonWebpackConfig {
@@ -31,7 +31,7 @@ kotlin {
     }
     @OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
     wasm {
-        moduleName = "justinsaler"
+        moduleName = "CV"
         browser {
             commonWebpackConfig {
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).copy(
@@ -57,6 +57,12 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
+                implementation(compose.runtime)
+                implementation(compose.ui)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1-wasm0")
             }
         }
@@ -73,14 +79,6 @@ kotlin {
         }
 
         val jsWasmMain by creating {
-            dependencies {
-                implementation(compose.runtime)
-                implementation(compose.ui)
-                implementation(compose.foundation)
-                implementation(compose.material3)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
-            }
             dependsOn(commonMain)
         }
 
@@ -112,7 +110,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("me.justin.application.ServerKt")
+    mainClass.set("me.leptonquark.application.ServerKt")
 }
 
 compose.experimental {
@@ -124,8 +122,6 @@ compose {
     val kotlinVersion: String by project
 
     kotlinCompilerPlugin.set(composeVersion)
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
-
 }
 
 tasks.named<Copy>("jvmProcessResources") {

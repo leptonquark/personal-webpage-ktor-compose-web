@@ -15,15 +15,17 @@ import ui.unit.Spacing
 @Composable
 internal fun MainView(
     windowClass: WindowClass,
+    title: String?,
     about: String?,
     contactMeLinks: List<ContactMeLink>,
     projects: List<Project>,
     onContactMeClicked: (ContactMeLink) -> Unit,
+    onBottomBarClicked: () -> Unit,
 ) {
     AppTheme {
         Scaffold(
-            topBar = { TopBar(windowClass, contactMeLinks, onContactMeClicked) },
-            bottomBar = { BottomBar() },
+            topBar = { TopBar(windowClass, title, contactMeLinks, onContactMeClicked) },
+            bottomBar = { BottomBar(onBottomBarClicked) },
         ) { paddingValues ->
             MainContent(
                 windowClass = windowClass,
