@@ -17,6 +17,7 @@ class MainScreen @Inject constructor(private val viewModel: MainViewModel) {
                 val state by viewModel.state.collectAsState()
                 MainView(
                     windowClass = state.windowClass,
+                    title = state.title,
                     about = state.about,
                     contactMeLinks = state.contactMeLinks,
                     projects = state.projects,

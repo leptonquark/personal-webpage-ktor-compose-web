@@ -16,19 +16,9 @@ import ui.unit.Spacing
 
 @Composable
 fun BottomBar() {
-    val message = buildAnnotatedString {
-        append(
-            "This webpage uses Kotlin Multiplatform, KTOR, Kotlin/JS, Compose for Web (experimental) and Kotlin/WASM (experimental). The source code is "
-        )
-        withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary)) {
-            append("available on GitHub.")
-        }
-    }
+    val message = bottomBarMessage
 
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RectangleShape
-    ) {
+    Card(modifier = Modifier.fillMaxWidth(), shape = RectangleShape) {
         Text(
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth().padding(Spacing.XS),
@@ -37,3 +27,13 @@ fun BottomBar() {
         )
     }
 }
+
+private val bottomBarMessage
+    @Composable get() = buildAnnotatedString {
+        append(
+            "This webpage uses Kotlin Multiplatform, KTOR and Compose for Web (experimental). The source code is "
+        )
+        withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+            append("available on GitHub.")
+        }
+    }

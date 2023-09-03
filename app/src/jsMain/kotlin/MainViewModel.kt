@@ -12,10 +12,12 @@ import kotlinx.coroutines.flow.stateIn
 import me.tatarka.inject.annotations.Inject
 import project.Project
 import project.ProjectRepository
+import title.TitleRepository
 import ui.WindowClass
 
 data class MainState(
     val windowClass: WindowClass = WindowClass(),
+    val title: String? = null,
     val about: String? = null,
     val contactMeLinks: List<ContactMeLink> = emptyList(),
     val projects: List<Project> = emptyList(),
@@ -28,6 +30,7 @@ sealed interface MainIntent {
 
 @Singleton
 class MainViewModel @Inject constructor(
+    private val titleRepository: TitleRepository,
     private val aboutRepository: AboutRepository,
     private val contactMeRepository: ContactMeRepository,
     private val projectRepository: ProjectRepository,
@@ -36,16 +39,19 @@ class MainViewModel @Inject constructor(
     private val viewModelScope = CoroutineScope(Dispatchers.Main)
 
     private val windowClass = eventFlow("resize", WindowClass()) { WindowClass() }
-    private val aboutFlow = flow { emit(aboutRepository.getAbout()) }
+
+    private val title = flow { emit(titleRepository.getTitle()) }
+    private val about = flow { emit(aboutRepository.getAbout()) }
     private val contactMe = flow { emit(contactMeRepository.getContactMeLinks()) }
     private val projects = flow { emit(projectRepository.getProjects()) }
 
-    val state = combine(windowClass, aboutFlow, contactMe, projects) { windowClass, about, links, projects ->
+    val state = combine(windowClass, title, about, contactMe, projects) { windowClass, title, about, links, projects ->
         MainState(
             windowClass,
+            title,
             about,
             links,
-            projects
+            projects,
         )
     }
         .stateIn(

@@ -15,6 +15,7 @@ import ui.unit.Spacing
 @Composable
 internal fun MainView(
     windowClass: WindowClass,
+    title: String?,
     about: String?,
     contactMeLinks: List<ContactMeLink>,
     projects: List<Project>,
@@ -22,7 +23,7 @@ internal fun MainView(
 ) {
     AppTheme {
         Scaffold(
-            topBar = { TopBar(windowClass, contactMeLinks, onContactMeClicked) },
+            topBar = { TopBar(windowClass, title, contactMeLinks, onContactMeClicked) },
             bottomBar = { BottomBar() },
         ) { paddingValues ->
             MainContent(
