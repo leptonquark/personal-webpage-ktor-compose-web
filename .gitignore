@@ -86,3 +86,4 @@ kotlin-js-store/
 application.conf
 projects.json
 main-content.json
+!**/project-images/
