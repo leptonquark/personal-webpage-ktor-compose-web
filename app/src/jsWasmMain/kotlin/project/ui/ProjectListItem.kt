@@ -13,25 +13,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.ColorFilter
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.LoadState
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.rememberImageBitmap
+import org.jetbrains.compose.resources.resource
 import project.Project
 import ui.unit.IconSize
 
-@OptIn(ExperimentalResourceApi::class, ExperimentalMaterial3Api::class)
+private const val FALLBACK_PROJECT_ICON_RESOURCE = "static/unknown.png"
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProjectListItem(project: Project) {
     ElevatedCard(modifier = Modifier.fillMaxHeight()) {
         ListItem(
             headlineText = { Text(text = project.projectName) },
             supportingText = { Text(text = project.client) },
-            leadingContent = {
-                Image(
-                    painter = painterResource("static/github.png"),
-                    contentDescription = project.projectName,
-                    modifier = Modifier.size(IconSize.M),
-                    colorFilter = ColorFilter.tint(LocalContentColor.current, BlendMode.SrcAtop)
-                )
-            },
+            leadingContent = { ProjectIcon(project) },
         )
     }
 }
+
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+private fun ProjectIcon(project: Project) {
+    val iconId = project.icon?.takeIf { id -> isValidResource(id) } ?: FALLBACK_PROJECT_ICON_RESOURCE
+    Image(
+        painter = painterResource(iconId),
+        contentDescription = project.projectName,
+        modifier = Modifier.size(IconSize.M),
+        colorFilter = ColorFilter.tint(LocalContentColor.current, BlendMode.SrcAtop)
+    )
+}
+
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+private fun isValidResource(id: String) = resource(id).rememberImageBitmap() !is LoadState.Error
