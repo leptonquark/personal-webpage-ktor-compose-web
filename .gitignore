@@ -80,7 +80,7 @@ outTmp/
 kotlin-ide/
 gradlew.bat
 gradlew/
-gradle/
+gradle/wrapper/
 kotlin-js-store/
 .idea/
 application.conf

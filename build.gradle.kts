@@ -7,3 +7,17 @@ allprojects {
         maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
     }
 }
+plugins {
+    val kotlinVersion = "1.9.0"
+    val composeVersion = "1.4.0-dev-wasm09"
+    val kspVersion = "1.9.0-1.0.11"
+    val detektVersion = "1.23.0"
+
+    kotlin("multiplatform") version kotlinVersion apply false
+    kotlin("jvm") version kotlinVersion apply false
+    kotlin("plugin.serialization") version kotlinVersion apply false
+    id("org.jetbrains.compose") version composeVersion apply false
+    id("com.google.devtools.ksp") version kspVersion apply false
+    id("io.gitlab.arturbosch.detekt") version detektVersion apply false
+}
+
