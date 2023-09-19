@@ -110,14 +110,11 @@ application {
     mainClass.set("me.leptonquark.application.ServerKt")
 }
 
-compose.experimental {
-    web.application {}
-}
-
 compose {
-    val composeVersion: String by project
-
-    kotlinCompilerPlugin.set(composeVersion)
+    experimental {
+        web.application {}
+    }
+    kotlinCompilerPlugin.set(libs.versions.compose.get())
 }
 
 tasks.named<Copy>("jvmProcessResources") {
