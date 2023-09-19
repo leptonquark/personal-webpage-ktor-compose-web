@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.ksp)
     alias(libs.plugins.detekt)
     application
 }
@@ -116,7 +116,6 @@ compose.experimental {
 
 compose {
     val composeVersion: String by project
-    val kotlinVersion: String by project
 
     kotlinCompilerPlugin.set(composeVersion)
 }

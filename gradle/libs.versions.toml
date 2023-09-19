@@ -1,5 +1,7 @@
 [versions]
 detekt = "1.23.0"
+ksp = "1.9.0-1.0.11"
 
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

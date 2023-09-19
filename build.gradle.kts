@@ -10,13 +10,12 @@ allprojects {
 plugins {
     val kotlinVersion = "1.9.0"
     val composeVersion = "1.4.0-dev-wasm09"
-    val kspVersion = "1.9.0-1.0.11"
 
     kotlin("multiplatform") version kotlinVersion apply false
     kotlin("jvm") version kotlinVersion apply false
     kotlin("plugin.serialization") version kotlinVersion apply false
     id("org.jetbrains.compose") version composeVersion apply false
-    id("com.google.devtools.ksp") version kspVersion apply false
+    alias(libs.plugins.ksp) apply false
     alias(libs.plugins.detekt) apply false
 }
 
