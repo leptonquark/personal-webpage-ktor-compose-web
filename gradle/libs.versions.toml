@@ -1,12 +1,18 @@
 [versions]
 compose = "1.4.0-dev-wasm09"
+css = "1.0.0-pre.624"
 detekt = "1.23.0"
+html = "0.9.1"
 inject = "0.6.1"
 kotlin = "1.9.0"
 ksp = "1.9.0-1.0.11"
 ktor = "2.3.2"
+serialization = "1.5.1-wasm0"
 
 [libraries]
+css = { group = "org.jetbrains.kotlin-wrappers", name = "kotlin-css", version.ref = "css" }
+html-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-html-jvm", version.ref = "html" }
+
 inject-compiler = { group = "me.tatarka.inject", name = "kotlin-inject-compiler-ksp", version.ref = "inject" }
 inject-runtime = { group = "me.tatarka.inject", name = "kotlin-inject-runtime", version.ref = "inject" }
 
@@ -17,6 +23,9 @@ ktor-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", versi
 ktor-server-content = { group = "io.ktor", name = "ktor-server-content-negotiation", version.ref = "ktor" }
 ktor-server-html = { group = "io.ktor", name = "ktor-server-html-builder-jvm", version.ref = "ktor" }
 ktor-server-netty = { group = "io.ktor", name = "ktor-server-netty", version.ref = "ktor" }
+
+serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+serialization-wasm = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core-wasm", version.ref = "serialization" }
 
 [bundles]
 ktor-js = ["ktor-client-core", "ktor-client-js", "ktor-client-content", "ktor-json"]

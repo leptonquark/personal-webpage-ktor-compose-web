@@ -53,14 +53,14 @@ kotlin {
                 implementation(compose.material3)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1-wasm0")
+                implementation(libs.serialization.json)
             }
         }
         val jvmMain by getting {
             dependencies {
                 implementation(libs.bundles.ktor.server)
-                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.9.1")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-css:1.0.0-pre.624")
+                implementation(libs.css)
+                implementation(libs.html.jvm)
             }
         }
 
@@ -79,7 +79,7 @@ kotlin {
         val wasmMain by getting {
             dependsOn(jsWasmMain)
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core-wasm:1.5.1-wasm0")
+                implementation(libs.serialization.wasm)
             }
         }
     }
