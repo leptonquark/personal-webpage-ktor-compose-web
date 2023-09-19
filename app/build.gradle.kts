@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
-    id("org.jetbrains.compose")
-    id("com.google.devtools.ksp")
-    id("io.gitlab.arturbosch.detekt")
+    alias(libs.plugins.compose)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
     application
 }
 
@@ -44,17 +44,7 @@ kotlin {
         binaries.executable()
     }
 
-    sourceSets.forEach {
-        it.dependencies {
-            val ktorVersion: String by project
-            implementation(project.dependencies.enforcedPlatform("io.ktor:ktor-bom:$ktorVersion"))
-
-        }
-    }
-
     sourceSets {
-        val kotlinInjectVersion: String by project
-
         val commonMain by getting {
             dependencies {
                 implementation(compose.runtime)
@@ -63,17 +53,14 @@ kotlin {
                 implementation(compose.material3)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1-wasm0")
+                implementation(libs.serialization.json)
             }
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty")
-                implementation("io.ktor:ktor-server-html-builder-jvm")
-                implementation("io.ktor:ktor-server-content-negotiation")
-                implementation("io.ktor:ktor-serialization-kotlinx-json")
-                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.9.1")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-css:1.0.0-pre.624")
+                implementation(libs.bundles.ktor.server)
+                implementation(libs.css)
+                implementation(libs.html.jvm)
             }
         }
 
@@ -84,42 +71,33 @@ kotlin {
         val jsMain by getting {
             dependsOn(jsWasmMain)
             dependencies {
-                implementation("io.ktor:ktor-client-core")
-                implementation("io.ktor:ktor-client-js")
-                implementation("io.ktor:ktor-client-content-negotiation")
-                implementation("io.ktor:ktor-serialization-kotlinx-json")
-                implementation("me.tatarka.inject:kotlin-inject-runtime:$kotlinInjectVersion")
+                implementation(libs.bundles.ktor.js)
+                implementation(libs.inject.runtime)
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
             }
         }
         val wasmMain by getting {
             dependsOn(jsWasmMain)
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core-wasm:1.5.1-wasm0")
-
+                implementation(libs.serialization.wasm)
             }
         }
     }
 }
 
 dependencies {
-    val kotlinInjectVersion: String by project
-    add("kspJs", "me.tatarka.inject:kotlin-inject-compiler-ksp:$kotlinInjectVersion")
+    add("kspJs", libs.inject.compiler)
 }
 
 application {
     mainClass.set("me.leptonquark.application.ServerKt")
 }
 
-compose.experimental {
-    web.application {}
-}
-
 compose {
-    val composeVersion: String by project
-    val kotlinVersion: String by project
-
-    kotlinCompilerPlugin.set(composeVersion)
+    experimental {
+        web.application {}
+    }
+    kotlinCompilerPlugin.set(libs.versions.compose.get())
 }
 
 tasks.named<Copy>("jvmProcessResources") {
@@ -134,9 +112,8 @@ tasks.named<JavaExec>("run") {
 
 configurations.all {
     resolutionStrategy.eachDependency {
-        val kotlinVersion: String by project
         if (requested.module.name.startsWith("kotlin-stdlib")) {
-            useVersion(kotlinVersion)
+            useVersion(libs.versions.kotlin.get())
         }
     }
 }
@@ -148,6 +125,6 @@ detekt {
         "src/jsWasmMain/kotlin",
         "src/jsMain/kotlin",
         "src/jvmMain/kotlin",
-        "src/wasmMain/kotlin"
+        "src/wasmMain/kotlin",
     )
 }
