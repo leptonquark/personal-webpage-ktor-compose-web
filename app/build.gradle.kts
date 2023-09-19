@@ -52,8 +52,6 @@ kotlin {
     }
 
     sourceSets {
-        val kotlinInjectVersion: String by project
-
         val commonMain by getting {
             dependencies {
                 implementation(compose.runtime)
@@ -87,7 +85,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-js")
                 implementation("io.ktor:ktor-client-content-negotiation")
                 implementation("io.ktor:ktor-serialization-kotlinx-json")
-                implementation("me.tatarka.inject:kotlin-inject-runtime:$kotlinInjectVersion")
+                implementation(libs.inject.runtime)
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
             }
         }
@@ -95,15 +93,13 @@ kotlin {
             dependsOn(jsWasmMain)
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core-wasm:1.5.1-wasm0")
-
             }
         }
     }
 }
 
 dependencies {
-    val kotlinInjectVersion: String by project
-    add("kspJs", "me.tatarka.inject:kotlin-inject-compiler-ksp:$kotlinInjectVersion")
+    add("kspJs", libs.inject.compiler)
 }
 
 application {
