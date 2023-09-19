@@ -4,11 +4,23 @@ detekt = "1.23.0"
 inject = "0.6.1"
 kotlin = "1.9.0"
 ksp = "1.9.0-1.0.11"
+ktor = "2.3.2"
 
 [libraries]
 inject-compiler = { group = "me.tatarka.inject", name = "kotlin-inject-compiler-ksp", version.ref = "inject" }
 inject-runtime = { group = "me.tatarka.inject", name = "kotlin-inject-runtime", version.ref = "inject" }
 
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-js = { group = "io.ktor", name = "ktor-client-js", version.ref = "ktor" }
+ktor-client-content = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-server-content = { group = "io.ktor", name = "ktor-server-content-negotiation", version.ref = "ktor" }
+ktor-server-html = { group = "io.ktor", name = "ktor-server-html-builder-jvm", version.ref = "ktor" }
+ktor-server-netty = { group = "io.ktor", name = "ktor-server-netty", version.ref = "ktor" }
+
+[bundles]
+ktor-js = ["ktor-client-core", "ktor-client-js", "ktor-client-content", "ktor-json"]
+ktor-server = ["ktor-json", "ktor-server-content", "ktor-server-html", "ktor-server-netty"]
 
 [plugins]
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
@@ -16,3 +28,4 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktor = { id = "io.ktor.plugin", version.ref = "ktor" }

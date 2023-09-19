@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
+    alias(libs.plugins.compose)
+    alias(libs.plugins.detekt)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.compose)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.detekt)
     application
 }
 
@@ -44,13 +44,6 @@ kotlin {
         binaries.executable()
     }
 
-    sourceSets.forEach {
-        it.dependencies {
-            val ktorVersion: String by project
-            implementation(project.dependencies.enforcedPlatform("io.ktor:ktor-bom:$ktorVersion"))
-        }
-    }
-
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -65,10 +58,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-netty")
-                implementation("io.ktor:ktor-server-html-builder-jvm")
-                implementation("io.ktor:ktor-server-content-negotiation")
-                implementation("io.ktor:ktor-serialization-kotlinx-json")
+                implementation(libs.bundles.ktor.server)
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.9.1")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-css:1.0.0-pre.624")
             }
@@ -81,10 +71,7 @@ kotlin {
         val jsMain by getting {
             dependsOn(jsWasmMain)
             dependencies {
-                implementation("io.ktor:ktor-client-core")
-                implementation("io.ktor:ktor-client-js")
-                implementation("io.ktor:ktor-client-content-negotiation")
-                implementation("io.ktor:ktor-serialization-kotlinx-json")
+                implementation(libs.bundles.ktor.js)
                 implementation(libs.inject.runtime)
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
             }
@@ -138,6 +125,6 @@ detekt {
         "src/jsWasmMain/kotlin",
         "src/jsMain/kotlin",
         "src/jvmMain/kotlin",
-        "src/wasmMain/kotlin"
+        "src/wasmMain/kotlin",
     )
 }
