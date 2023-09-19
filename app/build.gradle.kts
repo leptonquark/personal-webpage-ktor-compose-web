@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.detekt)
     application
@@ -129,9 +129,8 @@ tasks.named<JavaExec>("run") {
 
 configurations.all {
     resolutionStrategy.eachDependency {
-        val kotlinVersion: String by project
         if (requested.module.name.startsWith("kotlin-stdlib")) {
-            useVersion(kotlinVersion)
+            useVersion(libs.versions.kotlin.get())
         }
     }
 }

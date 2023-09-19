@@ -8,11 +8,8 @@ allprojects {
     }
 }
 plugins {
-    val kotlinVersion = "1.9.0"
-
-    kotlin("multiplatform") version kotlinVersion apply false
-    kotlin("jvm") version kotlinVersion apply false
-    kotlin("plugin.serialization") version kotlinVersion apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.compose) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.detekt) apply false
