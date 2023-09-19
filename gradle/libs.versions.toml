@@ -1,0 +1,5 @@
+[versions]
+detekt = "1.23.0"
+
+[plugins]
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

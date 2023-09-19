@@ -5,7 +5,7 @@ plugins {
     kotlin("plugin.serialization")
     id("org.jetbrains.compose")
     id("com.google.devtools.ksp")
-    id("io.gitlab.arturbosch.detekt")
+    alias(libs.plugins.detekt)
     application
 }
 
@@ -48,7 +48,6 @@ kotlin {
         it.dependencies {
             val ktorVersion: String by project
             implementation(project.dependencies.enforcedPlatform("io.ktor:ktor-bom:$ktorVersion"))
-
         }
     }
 
