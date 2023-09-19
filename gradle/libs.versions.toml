@@ -1,5 +1,5 @@
 [versions]
-compose = "1.4.0-dev-wasm09"
+compose = "1.5.10-dev1202"
 css = "1.0.0-pre.624"
 detekt = "1.23.0"
 html = "0.9.1"
