@@ -11,11 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import ui.unit.Spacing
-
-private const val BOTTOM_BAR_MESSAGE =
-    "This webpage uses Kotlin Multiplatform, KTOR and Compose for Web (experimental)."
 
 @Composable
 fun BottomBar(onBottomBarClicked: () -> Unit) {
@@ -32,8 +32,18 @@ fun BottomBar(onBottomBarClicked: () -> Unit) {
         Text(
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth().padding(Spacing.XS),
-            text = BOTTOM_BAR_MESSAGE,
+            text = bottomBarMessage,
             style = MaterialTheme.typography.bodySmall,
         )
     }
 }
+
+private val bottomBarMessage
+    @Composable get() = buildAnnotatedString {
+        append(
+            "This webpage uses Kotlin Multiplatform, KTOR and Compose for Web (experimental). The source code is "
+        )
+        withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+            append("available on GitHub.")
+        }
+    }
