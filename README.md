@@ -1,7 +1,16 @@
 # Summary
 
-This project is a template for a personal web application. The web application uses Kotlin Multiplatform, KTOR, and Compose for Web (experimental). 
-The web application looks different on Desktop and Mobile. 
+This project is a template for a personal web application. The web application uses Kotlin Multiplatform, KTOR, and Compose for Web (experimental).
+The web application looks different depending on the width of the view.
+
+## Compact
+
+![The web application on mobile](.github/screenshots/mobile.png)
+
+## Expanded
+
+![The web application on web](.github/screenshots/web.png)
+
 
 # HOWTO
 

@@ -40,9 +40,7 @@ fun BottomBar(onBottomBarClicked: () -> Unit) {
 
 private val bottomBarMessage
     @Composable get() = buildAnnotatedString {
-        append(
-            "This webpage uses Kotlin Multiplatform, KTOR and Compose for Web (experimental). The source code is "
-        )
+        append("This webpage uses Kotlin Multiplatform, KTOR and Compose for Web (experimental). The source code is ")
         withStyle(SpanStyle(color = MaterialTheme.colorScheme.primary)) {
             append("available on GitHub.")
         }
