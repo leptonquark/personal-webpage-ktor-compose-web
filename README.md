@@ -1,5 +1,9 @@
+# Summary
+
 This project is a template for a personal web application. The web application uses Kotlin Multiplatform, KTOR, and Compose for Web (experimental). 
 The web application looks different on Desktop and Mobile. 
+
+# HOWTO
 
 The application can be run by 
 ```
@@ -11,6 +15,8 @@ The first file is `main-content.json` and contains the title, about, and the con
 The second file is `projects.json` and contains project information. 
 
 The projects can also use icons which are shown in the list view.
+
+# License
 
 Copyright [2023] [Justin Salér]
 
