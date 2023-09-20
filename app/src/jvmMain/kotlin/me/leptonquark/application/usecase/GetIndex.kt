@@ -9,11 +9,11 @@ import kotlinx.html.id
 import kotlinx.html.link
 import kotlinx.html.script
 import kotlinx.html.title
-import me.leptonquark.application.data.MainContentService
+import me.leptonquark.application.data.MainConfigurationService
 
-fun HTML.getIndex(mainContentService: MainContentService) {
+fun HTML.getIndex(mainConfigurationService: MainConfigurationService) {
     head {
-        title(getTitle(mainContentService))
+        title(getTitle(mainConfigurationService))
         link(rel = "stylesheet", href = "/styles.css", type = "text/css")
         script { src = "/static/skiko.js" }
     }

@@ -7,7 +7,7 @@ import io.ktor.server.http.content.staticResources
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
-import me.leptonquark.application.data.MainContentService
+import me.leptonquark.application.data.MainConfigurationService
 import me.leptonquark.application.data.ProjectService
 import me.leptonquark.application.usecase.STYLES
 import me.leptonquark.application.usecase.about.getAboutMessage
@@ -20,12 +20,12 @@ import me.leptonquark.application.usecase.respondCss
 import route.ApiRoute
 
 fun Routing.router() {
-    val mainContentService = MainContentService()
+    val mainConfigurationService = MainConfigurationService()
     val projectService = ProjectService()
-    get("/") { call.respondHtml(HttpStatusCode.OK) { getIndex(mainContentService) } }
-    get(ApiRoute.TITLE) { call.respond(getTitleText(mainContentService)) }
-    get(ApiRoute.ABOUT) { call.respond(getAboutMessage(mainContentService)) }
-    get(ApiRoute.CONTACT_ME) { call.respond(getContactMe(mainContentService)) }
+    get("/") { call.respondHtml(HttpStatusCode.OK) { getIndex(mainConfigurationService) } }
+    get(ApiRoute.TITLE) { call.respond(getTitleText(mainConfigurationService)) }
+    get(ApiRoute.ABOUT) { call.respond(getAboutMessage(mainConfigurationService)) }
+    get(ApiRoute.CONTACT_ME) { call.respond(getContactMe(mainConfigurationService)) }
     get(ApiRoute.PROJECTS) { call.respond(getProjects(projectService)) }
     get(STYLES) { call.respondCss { getStyles() } }
     staticResources("/static", "/")

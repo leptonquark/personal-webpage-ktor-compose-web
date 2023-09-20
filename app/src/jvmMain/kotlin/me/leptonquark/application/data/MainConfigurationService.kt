@@ -4,12 +4,12 @@ import kotlinx.serialization.Serializable
 import me.leptonquark.application.util.fromJson
 
 @Serializable
-data class MainContent(
+data class MainConfiguration(
     val title: String,
     val about: String,
     val contactMe: List<String> = emptyList(),
 )
 
-class MainContentService : JsonService("/main-content.json") {
-    val mainContent: MainContent? get() = resource?.readText()?.fromJson<MainContent>()
+class MainConfigurationService : JsonService("/main-configuration.json") {
+    val configuration: MainConfiguration? get() = resource?.readText()?.fromJson<MainConfiguration>()
 }
