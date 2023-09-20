@@ -29,7 +29,7 @@ sealed interface MainIntent {
 }
 
 
-private const val SOURCE_CODE_URL = "https://github.com/leptonquark/me"
+private const val SOURCE_CODE_URL = "https://github.com/leptonquark/personal-webpage-ktor-compose-web"
 
 @Singleton
 class MainViewModel @Inject constructor(
