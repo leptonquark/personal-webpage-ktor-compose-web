@@ -21,7 +21,8 @@ The application can be run by
 
 The web application utilizes two configuration files (Both files are in `/Users/Netlight/IntelliJProjects/me/app/src/jvmMain/resources`):
 
-1. `main-content.json` - contains the title, about, and the contact me links. The template supports links from Github, Twitter, or LinkedIn.
+1. `main-content.json` - contains the title, about, and the contact me links. The template supports links from GitHub,
+   Twitter, or LinkedIn.
 2. `projects.json` - contains a list of projects. The projects can also use icons which are shown in the list view. The icon paths are stored inside this file.
 
 # License
