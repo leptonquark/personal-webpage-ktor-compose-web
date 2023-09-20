@@ -1,28 +1,24 @@
 {
   "projects": [
     {
-      "client": "FictionalCorp",
-      "projectName": "NextGen AI Assistant",
-      "description": "FictionalCorp develops an advanced AI assistant that utilizes cutting-edge natural language processing and machine learning algorithms. As a Senior AI Engineer, I contributed to the development of new AI features, optimized existing algorithms, and integrated the AI assistant into various platforms and devices.",
-      "icon": ""
+      "client": "Roman Empire",
+      "projectName": "Stoic Governance Framework",
+      "description": "As Emperor of the Roman Empire, I implemented the Stoic Governance Framework, a set of principles and policies designed to promote justice, ethics, and the well-being of citizens. This project aimed to create a just and harmonious society based on Stoic philosophy."
     },
     {
-      "client": "TechRevolution Inc.",
-      "projectName": "Quantum Computing Research",
-      "description": "Engaged in quantum computing research at TechRevolution Inc. Working alongside a team of brilliant researchers, I focused on developing quantum algorithms and simulations, exploring potential applications in cryptography and optimization problems.",
-      "icon": ""
+      "client": "Imperial Academy of Philosophy",
+      "projectName": "Stoic Philosophical Discourse",
+      "description": "I initiated the Stoic Philosophical Discourse project at the Imperial Academy of Philosophy. This involved organizing philosophical discussions, lectures, and the exchange of Stoic ideas among scholars and students, fostering intellectual growth and wisdom."
     },
     {
-      "client": "GlobalBank",
-      "projectName": "Blockchain Integration",
-      "description": "Collaborated with GlobalBank's innovation team to implement blockchain technology into their existing financial systems. As a Blockchain Developer, I contributed to the design and implementation of smart contracts and decentralized applications, streamlining various financial processes.",
-      "icon": ""
+      "client": "Stoic Mentorship Program",
+      "projectName": "Mentoring Future Leaders",
+      "description": "I led the Stoic Mentorship Program, mentoring young leaders in the Roman Empire, including my son Commodus. This project focused on imparting Stoic virtues, leadership skills, and ethical decision-making to cultivate responsible and capable leaders."
     },
     {
-      "client": "SpaceExplorers Inc.",
-      "projectName": "Autonomous Rover System",
-      "description": "Joined the SpaceExplorers team to develop an autonomous rover system for planetary exploration. As a Robotics Engineer, I was responsible for designing and programming the rover's autonomous navigation system, sensor integration, and mission planning.",
-      "icon": ""
+      "client": "Roman Justice System",
+      "projectName": "Stoic Legal Reforms",
+      "description": "Within the Roman justice system, I introduced Stoic Legal Reforms to ensure fairness and impartiality in legal proceedings. This project aimed to align Roman law with Stoic principles of equity, virtue, and rational judgment."
     }
   ]
 }
