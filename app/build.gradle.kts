@@ -95,9 +95,10 @@ application {
 
 compose {
     experimental {
-        web.application {}
+        web.application
     }
     kotlinCompilerPlugin.set(libs.versions.compose.get())
+    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
 
 tasks.named<Copy>("jvmProcessResources") {
