@@ -7,13 +7,7 @@ data class Project(
     val client: String,
     val projectName: String,
     val description: String,
-    val company: String,
-    val city: String,
-    val country: String,
-    val position: String,
-    val startDate: String,
-    val endDate: String,
-    val icon: String?,
+    val icon: String? = null,
 )
 
 @Serializable

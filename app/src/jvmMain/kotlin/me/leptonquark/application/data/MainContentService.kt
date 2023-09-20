@@ -7,7 +7,7 @@ import me.leptonquark.application.util.fromJson
 data class MainContent(
     val title: String,
     val about: String,
-    val contactMe: List<String>,
+    val contactMe: List<String> = emptyList(),
 )
 
 class MainContentService : JsonService("/main-content.json", "/main-content-sample.json") {

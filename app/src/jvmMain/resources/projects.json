@@ -4,45 +4,25 @@
       "client": "FictionalCorp",
       "projectName": "NextGen AI Assistant",
       "description": "FictionalCorp develops an advanced AI assistant that utilizes cutting-edge natural language processing and machine learning algorithms. As a Senior AI Engineer, I contributed to the development of new AI features, optimized existing algorithms, and integrated the AI assistant into various platforms and devices.",
-      "company": "ImaginaryConsulting",
-      "city": "New York City",
-      "country": "United States",
-      "position": "Senior AI Engineer",
-      "startDate": "1/1/2023",
-      "endDate": "Current"
+      "icon": ""
     },
     {
       "client": "TechRevolution Inc.",
       "projectName": "Quantum Computing Research",
       "description": "Engaged in quantum computing research at TechRevolution Inc. Working alongside a team of brilliant researchers, I focused on developing quantum algorithms and simulations, exploring potential applications in cryptography and optimization problems.",
-      "company": "InnovateTech",
-      "city": "San Francisco",
-      "country": "United States",
-      "position": "Quantum Computing Researcher",
-      "startDate": "1/6/2022",
-      "endDate": "31/12/2022"
+      "icon": ""
     },
     {
       "client": "GlobalBank",
       "projectName": "Blockchain Integration",
       "description": "Collaborated with GlobalBank's innovation team to implement blockchain technology into their existing financial systems. As a Blockchain Developer, I contributed to the design and implementation of smart contracts and decentralized applications, streamlining various financial processes.",
-      "company": "DigitalSolutions",
-      "city": "London",
-      "country": "United Kingdom",
-      "position": "Blockchain Developer",
-      "startDate": "1/3/2020",
-      "endDate": "31/5/2022"
+      "icon": ""
     },
     {
       "client": "SpaceExplorers Inc.",
       "projectName": "Autonomous Rover System",
       "description": "Joined the SpaceExplorers team to develop an autonomous rover system for planetary exploration. As a Robotics Engineer, I was responsible for designing and programming the rover's autonomous navigation system, sensor integration, and mission planning.",
-      "company": "SpaceExplorers Inc.",
-      "city": "Houston",
-      "country": "United States",
-      "position": "Robotics Engineer",
-      "startDate": "1/9/2017",
-      "endDate": "31/2/2020"
+      "icon": ""
     }
   ]
 }
