@@ -1,0 +1,24 @@
+{
+  "projects": [
+    {
+      "client": "Roman Empire",
+      "projectName": "Stoic Governance Framework",
+      "description": "As Emperor of the Roman Empire, I implemented the Stoic Governance Framework, a set of principles and policies designed to promote justice, ethics, and the well-being of citizens. This project aimed to create a just and harmonious society based on Stoic philosophy."
+    },
+    {
+      "client": "Imperial Academy of Philosophy",
+      "projectName": "Stoic Philosophical Discourse",
+      "description": "I initiated the Stoic Philosophical Discourse project at the Imperial Academy of Philosophy. This involved organizing philosophical discussions, lectures, and the exchange of Stoic ideas among scholars and students, fostering intellectual growth and wisdom."
+    },
+    {
+      "client": "Stoic Mentorship Program",
+      "projectName": "Mentoring Future Leaders",
+      "description": "I led the Stoic Mentorship Program, mentoring young leaders in the Roman Empire, including my son Commodus. This project focused on imparting Stoic virtues, leadership skills, and ethical decision-making to cultivate responsible and capable leaders."
+    },
+    {
+      "client": "Roman Justice System",
+      "projectName": "Stoic Legal Reforms",
+      "description": "Within the Roman justice system, I introduced Stoic Legal Reforms to ensure fairness and impartiality in legal proceedings. This project aimed to align Roman law with Stoic principles of equity, virtue, and rational judgment."
+    }
+  ]
+}

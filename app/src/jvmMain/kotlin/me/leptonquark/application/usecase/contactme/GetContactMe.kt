@@ -1,10 +1,10 @@
 package me.leptonquark.application.usecase.contactme
 
 import contactme.ContactMeLink
-import me.leptonquark.application.data.MainContentService
+import me.leptonquark.application.data.MainConfigurationService
 
-fun getContactMe(mainContentService: MainContentService) =
-    mainContentService.mainContent?.run {
+fun getContactMe(mainConfigurationService: MainConfigurationService) =
+    mainConfigurationService.configuration?.run {
         contactMe.mapNotNull { url ->
             ContactMeWebsite.fromUrl(url)?.let { website ->
                 ContactMeLink(
