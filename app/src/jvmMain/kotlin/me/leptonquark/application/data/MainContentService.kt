@@ -10,6 +10,6 @@ data class MainContent(
     val contactMe: List<String> = emptyList(),
 )
 
-class MainContentService : JsonService("/main-content.json", "/main-content-sample.json") {
+class MainContentService : JsonService("/main-content.json") {
     val mainContent: MainContent? get() = resource?.readText()?.fromJson<MainContent>()
 }
