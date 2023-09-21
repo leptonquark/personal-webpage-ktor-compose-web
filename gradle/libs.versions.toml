@@ -7,7 +7,7 @@ inject = "0.6.3"
 kotlin = "1.9.10"
 ksp = "1.9.10-1.0.13"
 ktor = "2.3.4"
-serialization = "1.5.1-wasm0"
+serialization = "1.5.2-wasm0"
 
 [libraries]
 css = { group = "org.jetbrains.kotlin-wrappers", name = "kotlin-css", version.ref = "css" }
