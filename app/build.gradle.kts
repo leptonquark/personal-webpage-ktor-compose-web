@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.ir.DefaultIncrementalSyncTask
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -111,11 +113,29 @@ tasks.named<JavaExec>("run") {
     classpath(tasks.named<Jar>("jvmJar"))
 }
 
+tasks.named<KotlinWebpack>("jsBrowserProductionWebpack") {
+    dependsOn(tasks.named<DefaultIncrementalSyncTask>("wasmProductionExecutableCompileSync"))
+}
+
+tasks.named<DefaultIncrementalSyncTask>("jsProductionExecutableCompileSync") {
+    dependsOn(tasks.named<Copy>("wasmBrowserProductionExecutableDistributeResources"))
+}
+
+tasks.named<DefaultIncrementalSyncTask>("jsProductionExecutableCompileSync") {
+    dependsOn(tasks.named<KotlinWebpack>("wasmBrowserProductionWebpack"))
+}
+
 configurations.all {
     resolutionStrategy.eachDependency {
         if (requested.module.name.startsWith("kotlin-stdlib")) {
             useVersion(libs.versions.kotlin.get())
         }
+    }
+}
+
+project.tasks.whenTaskAdded {
+    if (name == "compileJsWasmMainKotlinMetadata") {
+        enabled = false
     }
 }
 
