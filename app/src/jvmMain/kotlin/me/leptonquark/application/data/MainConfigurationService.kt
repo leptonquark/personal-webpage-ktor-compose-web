@@ -11,5 +11,5 @@ data class MainConfiguration(
 )
 
 class MainConfigurationService : JsonService("/main-configuration.json") {
-    val configuration: MainConfiguration? get() = resource?.readText()?.fromJson<MainConfiguration>()
+    val configuration: MainConfiguration? get() = resource?.run { readText().fromJson<MainConfiguration>() }
 }
