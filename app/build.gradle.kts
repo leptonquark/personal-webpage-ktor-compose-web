@@ -125,14 +125,6 @@ tasks.named<DefaultIncrementalSyncTask>("jsProductionExecutableCompileSync") {
     dependsOn(tasks.named<KotlinWebpack>("wasmBrowserProductionWebpack"))
 }
 
-configurations.all {
-    resolutionStrategy.eachDependency {
-        if (requested.module.name.startsWith("kotlin-stdlib")) {
-            useVersion(libs.versions.kotlin.get())
-        }
-    }
-}
-
 project.tasks.whenTaskAdded {
     if (name == "compileJsWasmMainKotlinMetadata") {
         enabled = false
