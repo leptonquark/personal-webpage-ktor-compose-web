@@ -32,7 +32,7 @@ kotlin {
         }
     }
     @OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
-    wasm {
+    wasmJs {
         moduleName = "CV"
         browser {
             commonWebpackConfig {
@@ -78,7 +78,7 @@ kotlin {
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
             }
         }
-        val wasmMain by getting {
+        val wasmJsMain by getting {
             dependsOn(jsWasmMain)
             dependencies {
                 implementation(libs.serialization.wasm)
@@ -99,7 +99,7 @@ compose {
     experimental {
         web.application
     }
-    kotlinCompilerPlugin.set(libs.versions.compose.get())
+    kotlinCompilerPlugin.set("1.5.2.1-Beta")
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
 
@@ -114,15 +114,15 @@ tasks.named<JavaExec>("run") {
 }
 
 tasks.named<KotlinWebpack>("jsBrowserProductionWebpack") {
-    dependsOn(tasks.named<DefaultIncrementalSyncTask>("wasmProductionExecutableCompileSync"))
+    dependsOn(tasks.named<DefaultIncrementalSyncTask>("wasmJsProductionExecutableCompileSync"))
 }
 
 tasks.named<DefaultIncrementalSyncTask>("jsProductionExecutableCompileSync") {
-    dependsOn(tasks.named<Copy>("wasmBrowserProductionExecutableDistributeResources"))
+    dependsOn(tasks.named<Copy>("wasmJsBrowserProductionExecutableDistributeResources"))
 }
 
 tasks.named<DefaultIncrementalSyncTask>("jsProductionExecutableCompileSync") {
-    dependsOn(tasks.named<KotlinWebpack>("wasmBrowserProductionWebpack"))
+    dependsOn(tasks.named<KotlinWebpack>("wasmJsBrowserProductionWebpack"))
 }
 
 project.tasks.whenTaskAdded {
@@ -138,6 +138,6 @@ detekt {
         "src/jsWasmMain/kotlin",
         "src/jsMain/kotlin",
         "src/jvmMain/kotlin",
-        "src/wasmMain/kotlin",
+        "src/wasmJsMain/kotlin",
     )
 }
