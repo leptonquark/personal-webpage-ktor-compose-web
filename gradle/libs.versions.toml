@@ -1,6 +1,6 @@
 [versions]
 compose = "1.4.0-dev-wasm09"
-css = "1.0.0-pre.629"
+css = "1.0.0-pre.630"
 detekt = "1.23.1"
 html = "0.10.0"
 inject = "0.6.3"
