@@ -99,7 +99,7 @@ compose {
     experimental {
         web.application
     }
-    kotlinCompilerPlugin.set("1.5.2.1-Beta")
+    kotlinCompilerPlugin.set(libs.versions.composecompiler.get())
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
 
