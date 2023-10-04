@@ -11,6 +11,12 @@ ktor = "2.3.4"
 serialization = "1.6.0-wasm0"
 
 [libraries]
+compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "compose" }
+compose-ui = { group = "org.jetbrains.compose.ui", name = "ui", version.ref = "compose" }
+compose-foundation = { group = "org.jetbrains.compose.foundation", name = "foundation", version.ref = "compose" }
+compose-material3 = { group = "org.jetbrains.compose.material3", name = "material3", version.ref = "compose" }
+compose-resources = { group = "org.jetbrains.compose.components", name = "components-resources", version.ref = "compose" }
+
 css = { group = "org.jetbrains.kotlin-wrappers", name = "kotlin-css", version.ref = "css" }
 html-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-html-jvm", version.ref = "html" }
 
@@ -29,6 +35,8 @@ serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serializ
 serialization-wasm = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core-wasm-js", version.ref = "serialization" }
 
 [bundles]
+compose = ["compose-runtime", "compose-ui", "compose-foundation", "compose-material3", "compose-resources"]
+
 ktor-js = ["ktor-client-core", "ktor-client-js", "ktor-client-content", "ktor-json"]
 ktor-server = ["ktor-json", "ktor-server-content", "ktor-server-html", "ktor-server-netty"]
 
