@@ -32,7 +32,7 @@ kotlin {
         }
     }
     @OptIn(org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl::class)
-    wasm {
+    wasmJs {
         moduleName = "CV"
         browser {
             commonWebpackConfig {
@@ -49,12 +49,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(compose.runtime)
-                implementation(compose.ui)
-                implementation(compose.foundation)
-                implementation(compose.material3)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
+                implementation(libs.bundles.compose)
                 implementation(libs.serialization.json)
             }
         }
@@ -78,7 +73,7 @@ kotlin {
                 kotlin.srcDir("build/generated/ksp/js/jsMain/kotlin")
             }
         }
-        val wasmMain by getting {
+        val wasmJsMain by getting {
             dependsOn(jsWasmMain)
             dependencies {
                 implementation(libs.serialization.wasm)
@@ -99,7 +94,7 @@ compose {
     experimental {
         web.application
     }
-    kotlinCompilerPlugin.set(libs.versions.compose.get())
+    kotlinCompilerPlugin.set(libs.versions.composecompiler.get())
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${libs.versions.kotlin.get()}")
 }
 
@@ -114,20 +109,28 @@ tasks.named<JavaExec>("run") {
 }
 
 tasks.named<KotlinWebpack>("jsBrowserProductionWebpack") {
-    dependsOn(tasks.named<DefaultIncrementalSyncTask>("wasmProductionExecutableCompileSync"))
+    dependsOn(tasks.named<DefaultIncrementalSyncTask>("wasmJsProductionExecutableCompileSync"))
 }
 
 tasks.named<DefaultIncrementalSyncTask>("jsProductionExecutableCompileSync") {
-    dependsOn(tasks.named<Copy>("wasmBrowserProductionExecutableDistributeResources"))
+    dependsOn(tasks.named<Copy>("wasmJsBrowserProductionExecutableDistributeResources"))
 }
 
 tasks.named<DefaultIncrementalSyncTask>("jsProductionExecutableCompileSync") {
-    dependsOn(tasks.named<KotlinWebpack>("wasmBrowserProductionWebpack"))
+    dependsOn(tasks.named<KotlinWebpack>("wasmJsBrowserProductionWebpack"))
 }
 
 project.tasks.whenTaskAdded {
     if (name == "compileJsWasmMainKotlinMetadata") {
         enabled = false
+    }
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.module.name.startsWith("kotlin-stdlib")) {
+            useVersion(libs.versions.kotlin.get())
+        }
     }
 }
 
@@ -138,6 +141,6 @@ detekt {
         "src/jsWasmMain/kotlin",
         "src/jsMain/kotlin",
         "src/jvmMain/kotlin",
-        "src/wasmMain/kotlin",
+        "src/wasmJsMain/kotlin",
     )
 }

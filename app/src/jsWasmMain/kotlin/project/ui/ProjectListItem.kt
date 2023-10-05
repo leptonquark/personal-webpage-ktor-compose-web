@@ -27,8 +27,8 @@ private const val FALLBACK_PROJECT_ICON_RESOURCE = "static/unknown.png"
 fun ProjectListItem(project: Project) {
     ElevatedCard(modifier = Modifier.fillMaxHeight()) {
         ListItem(
-            headlineText = { Text(text = project.projectName) },
-            supportingText = { Text(text = project.client) },
+            headlineContent = { Text(text = project.projectName) },
+            supportingContent = { Text(text = project.client) },
             leadingContent = { ProjectIcon(project) },
         )
     }
