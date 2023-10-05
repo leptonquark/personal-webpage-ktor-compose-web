@@ -126,6 +126,14 @@ project.tasks.whenTaskAdded {
     }
 }
 
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.module.name.startsWith("kotlin-stdlib")) {
+            useVersion(libs.versions.kotlin.get())
+        }
+    }
+}
+
 detekt {
     config.setFrom("detekt-config.yml")
     source.setFrom(
