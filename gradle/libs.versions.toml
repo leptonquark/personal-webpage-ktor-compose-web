@@ -8,7 +8,7 @@ inject = "0.6.3"
 kotlin = "1.9.20-Beta2"
 ksp = "1.9.20-Beta2-1.0.13"
 ktor = "2.3.5"
-serialization = "1.6.1-wasm0"
+serialization = "1.6.1-wasm1"
 
 [libraries]
 compose-runtime = { group = "org.jetbrains.compose.runtime", name = "runtime", version.ref = "compose" }
