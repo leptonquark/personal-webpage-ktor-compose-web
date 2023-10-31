@@ -2,7 +2,7 @@
 compose = "1.5.1-dev-wasm01"
 composecompiler = "1.5.2.1-Beta"
 css = "1.0.0-pre.636"
-detekt = "1.23.2"
+detekt = "1.23.3"
 html = "0.10.1"
 inject = "0.6.3"
 kotlin = "1.9.20-Beta2"
