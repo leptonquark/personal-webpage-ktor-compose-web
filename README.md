@@ -9,7 +9,7 @@ The application can be run by
 ./gradlew run
 ```
 
-The web application utilizes two configuration files (Both files are in `/Users/Netlight/IntelliJProjects/me/app/src/jvmMain/resources`):
+The web application utilizes two configuration files (Both files are located in `/app/src/jvmMain/resources`):
 
 1. `main-content.json` - contains the title, about, and the contact me links. The template supports links from GitHub,
    Twitter, or LinkedIn.
